@@ -1,4 +1,7 @@
+"use client";
+
 import { CheckIcon } from "@heroicons/react/24/solid";
+import { useEffect } from "react";
 
 const steps = [
   { id: "01", name: "Eligibility", href: "#", status: "current" },
@@ -6,7 +9,14 @@ const steps = [
   { id: "03", name: "Preview", href: "#", status: "upcoming" },
 ];
 
-export default function ProgressBar() {
+export default function ProgressBar({ step }: { step: number }) {
+  useEffect(() => {
+    steps[step].status = "current";
+    if (step > 0) {
+      steps[0].status = "complete";
+    }
+  }, [step]);
+
   return (
     <nav aria-label="Progress" className="flex items-center justify-center">
       <ol
@@ -43,7 +53,10 @@ export default function ProgressBar() {
                 </span>
               </a>
             ) : (
-              <a href={step.href} className="group flex items-center">
+              <a
+                href={step.href}
+                className="group flex items-center cursor-not-allowed"
+              >
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                     <span className="text-gray-500 group-hover:text-gray-900">

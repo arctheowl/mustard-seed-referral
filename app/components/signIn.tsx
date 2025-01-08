@@ -3,12 +3,6 @@ import ProgressBar from "./progressBar";
 import Image from "next/image";
 
 export default function SignInPage() {
-  const steps = [
-    { id: "01", name: "", href: "#", status: "current" },
-    { id: "02", name: "", href: "#", status: "upcoming" },
-    { id: "03", name: "", href: "#", status: "upcoming" },
-  ];
-
   useEffect(() => {
     requirements.map((requirement) => {
       return !(document.getElementById(requirement.name) as HTMLInputElement)
@@ -44,7 +38,7 @@ export default function SignInPage() {
         </div>
 
         <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-          <ProgressBar />
+          <ProgressBar step={0} />
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
               <h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-gray-900 motion-preset-confetti ">

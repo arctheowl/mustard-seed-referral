@@ -13,6 +13,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { getData } from "../actions";
+import Image from "next/image";
 
 const navigation = [
   { name: "Referrals", href: "#", icon: FolderIcon, current: false },
@@ -27,9 +28,9 @@ const secondaryNavigation = [
   { name: "Notifications", href: "#", current: false },
 ];
 const stats = [
-  { name: "Number of deploys", value: "405" },
-  { name: "Average deploy time", value: "3.65", unit: "mins" },
-  { name: "Number of servers", value: "3" },
+  { name: "Number of Referrals", value: "50" },
+  { name: "Signup for Interest", value: "150" },
+  { name: "Time Live", value: "3", unit: "mins" },
   { name: "Success rate", value: "98.5%" },
 ];
 const statuses = {
@@ -125,25 +126,6 @@ export default function Dashboard() {
                         ))}
                       </ul>
                     </li>
-                    <li>
-                      <div className="text-xs/6 font-semibold text-gray-400">
-                        Your teams
-                      </div>
-                    </li>
-                    <li className="-mx-6 mt-auto">
-                      <a
-                        href="#"
-                        className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800"
-                      >
-                        <img
-                          alt=""
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          className="size-8 rounded-full bg-gray-800"
-                        />
-                        <span className="sr-only">Your profile</span>
-                        <span aria-hidden="true">Tom Cook</span>
-                      </a>
-                    </li>
                   </ul>
                 </nav>
               </div>
@@ -155,11 +137,13 @@ export default function Dashboard() {
         <div className="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
-            <div className="flex h-16 shrink-0 items-center">
-              <img
+            <div className="flex h-24 items-center">
+              <Image
                 alt="Your Company"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
+                src="/MustardSeed_Primary-Logo.png"
+                width={400}
+                height={400}
+                className="h-24 w-auto"
               />
             </div>
             <nav className="flex flex-1 flex-col">
@@ -186,21 +170,6 @@ export default function Dashboard() {
                       </li>
                     ))}
                   </ul>
-                </li>
-
-                <li className="-mx-6 mt-auto">
-                  <a
-                    href="#"
-                    className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-gray-800"
-                  >
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      className="size-8 rounded-full bg-gray-800"
-                    />
-                    <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
-                  </a>
                 </li>
               </ul>
             </nav>
@@ -266,17 +235,10 @@ export default function Dashboard() {
                     </div>
                     <h1 className="flex gap-x-3 text-base/7">
                       <span className="font-semibold text-white">
-                        Planetaria
-                      </span>
-                      <span className="text-gray-600">/</span>
-                      <span className="font-semibold text-white">
-                        mobile-api
+                        Referral Dashboard
                       </span>
                     </h1>
                   </div>
-                  <p className="mt-2 text-xs/6 text-gray-400">
-                    Deploys from GitHub via main branch
-                  </p>
                 </div>
                 <div className="order-first flex-none rounded-full bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30 sm:order-none">
                   Production
@@ -350,7 +312,7 @@ export default function Dashboard() {
                     </th>
                     <th
                       scope="col"
-                      className="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
+                      className="hidden py-2 pl-0 pr-4 text-center font-semibold sm:table-cell sm:pr-6 lg:pr-8 "
                     >
                       ID
                     </th>
@@ -377,7 +339,7 @@ export default function Dashboard() {
                       <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
                         {user.name}
                       </td>
-                      <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
+                      <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell text-center">
                         {user.id}
                       </td>
                     </tr>
