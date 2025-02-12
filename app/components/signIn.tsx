@@ -33,7 +33,7 @@ export default function SignInPage() {
   return (
     <>
       <div className="grid grid-cols-2 min-h-full bg-white rounded">
-        <div className="relative ">
+        <div className="relative hidden lg:block lg:flex-1">
           <Image src="/MustardSeed_Primary-Logo.png" alt="hero" layout="fill" />
         </div>
 

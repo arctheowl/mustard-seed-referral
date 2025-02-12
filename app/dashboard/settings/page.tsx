@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
 import {
   Dialog,
   DialogBackdrop,
@@ -13,17 +12,19 @@ import {
   FolderIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { getCountDownTime, getData } from "../actions";
+import {
+  adjustCountDownTime,
+  getCountDownTime,
+  getData,
+  getRemainingTickets,
+  setActionsTickets,
+} from "@/app/actions";
 import Image from "next/image";
+import { format } from "date-fns";
 
 const navigation = [
-  { name: "Referrals", href: "#", icon: FolderIcon, current: false },
-  {
-    name: "Settings",
-    href: "dashboard/settings",
-    icon: Cog6ToothIcon,
-    current: false,
-  },
+  { name: "Referrals", href: "/dashboard", icon: FolderIcon, current: false },
+  { name: "Settings", href: "#", icon: Cog6ToothIcon, current: false },
 ];
 
 const secondaryNavigation = [
@@ -55,50 +56,22 @@ interface IUserData {
   email: string;
 }
 
-// function exportUserInfo(data: any) {
-const convertToCSV = (objArray: any) => {
-  const array = typeof objArray !== "object" ? JSON.parse(objArray) : objArray;
-  let str = "id,name,value\r\n";
-
-  for (let i = 0; i < array.length; i++) {
-    let line = "";
-    for (let index in array[i]) {
-      if (line !== "") line += ",";
-
-      line += array[i][index];
-    }
-    str += line + "\r\n";
-  }
-  return str;
-};
-
-const downloadCSV = (data: any) => {
-  const csvData = new Blob([convertToCSV(data)], { type: "text/csv" });
-  const csvURL = URL.createObjectURL(csvData);
-  const link = document.createElement("a");
-  link.href = csvURL;
-  link.download = `referral_export.csv`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
-// const fileData = JSON.stringify(userInfo);
-// const blob = new Blob([fileData], { type: "text/csv" });
-// const url = URL.createObjectURL(blob);
-// const link = document.createElement("a");
-// link.download = "referral_export.csv";
-// link.href = url;
-// link.click();
-// }
-
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState<IUserData[]>([]);
+  const [tickets, setTickets] = useState("");
+  const [hours, setHours] = useState("");
+  const [date, setDate] = useState("");
   const [stats, setStats] = useState<any[]>([]);
-  const [timeLive, setTimeLive] = useState<any>();
   const currentTime = new Date().getTime();
+
   useEffect(() => {
     let countDownTimer = "";
+    let serverTickets = "";
+    getRemainingTickets().then((data: any) => {
+      console.log("TICKET", data[0].ticket_number);
+      serverTickets = data[0].ticket_number;
+    });
     getCountDownTime().then((data: any) => {
       console.log(data[0].time.toString());
       countDownTimer = data[0]?.time.toString();
@@ -117,17 +90,27 @@ export default function Dashboard() {
           value: format(countDownTimer, "HH:mm:ss dd-MM-yyyy"),
         },
         {
-          name: "Success rate",
-          value: "98.5%",
+          name: "Remaing Referrals",
+          value: serverTickets,
         },
         {
           name: "Time Live",
-          value: timeLive ? timeLive : "Not Live",
-          unit: timeLive ? "mins" : "",
+          value: Math.floor((currentTime - Date.parse(countDownTimer)) / 60000),
+          unit: "mins",
         },
       ]);
     });
   }, []);
+
+  const handleTimeSubmit = (e: any) => {
+    e.preventDefault();
+    adjustCountDownTime(`${date} ${hours}`);
+  };
+
+  const handleTicketSubmit = (e: any) => {
+    e.preventDefault();
+    setActionsTickets(tickets);
+  };
 
   return (
     <>
@@ -247,56 +230,8 @@ export default function Dashboard() {
         </div>
 
         <div className="xl:pl-72">
-          {/* Sticky search header */}
-          {/* <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
-            <button
-              type="button"
-              onClick={() => setSidebarOpen(true)}
-              className="-m-2.5 p-2.5 text-white xl:hidden"
-            >
-              <span className="sr-only">Open sidebar</span>
-              <Bars3Icon aria-hidden="true" className="size-5" />
-            </button>
-
-            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-              <form action="#" method="GET" className="grid flex-1 grid-cols-1">
-                <input
-                  name="search"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  className="col-start-1 row-start-1 block size-full bg-transparent pl-8 text-base text-white outline-none placeholder:text-gray-500 sm:text-sm/6"
-                />
-                <MagnifyingGlassIcon
-                  aria-hidden="true"
-                  className="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-500"
-                />
-              </form>
-            </div>
-          </div> */}
-
           <main>
             <header>
-              {/* Secondary navigation */}
-              {/* <nav className="flex overflow-x-auto border-b border-white/10 py-4">
-                <ul
-                  role="list"
-                  className="flex min-w-full flex-none gap-x-6 px-4 text-sm/6 font-semibold text-gray-400 sm:px-6 lg:px-8"
-                >
-                  {secondaryNavigation.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className={item.current ? "text-indigo-400" : ""}
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav> */}
-
-              {/* Heading */}
               <div className="flex flex-col items-start justify-between gap-x-8 gap-y-4 bg-gray-700/10 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
                 <div>
                   <div className="flex items-center gap-x-3">
@@ -346,87 +281,86 @@ export default function Dashboard() {
                 ))}
               </div>
             </header>
+            <div className="flex w-full gap-x-4 px-4 py-4 sm:px-6 lg:px-8">
+              <form>
+                <div className="mb-4 text-black">
+                  <label
+                    htmlFor="date"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Date
+                  </label>
+                  <input
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                    type="date"
+                    id="date"
+                    name="date"
+                    min="0"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                  <label
+                    htmlFor="hours"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Time
+                  </label>
+                  <input
+                    onChange={(e) => {
+                      setHours(e.target.value + ":00");
+                    }}
+                    required
+                    type="time"
+                    id="hours"
+                    name="hours"
+                    min="0"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
 
-            {/* Activity list */}
-            <div className="border-t border-white/10 pt-11">
-              <div className="flex items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
-                <h2 className="px-4 text-base/7 font-semibold text-white sm:px-6 lg:px-8">
-                  Latest activity
-                </h2>
                 <button
-                  onClick={() => {
-                    downloadCSV(data);
+                  type="button"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTimeSubmit(e);
                   }}
-                  className="order-first flex-none rounded-full bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30 sm:order-none sm:px-4 lg:px-6 "
                 >
-                  Export
+                  Set Timer
                 </button>
-              </div>
+              </form>
+              <form>
+                <div className="mb-4 text-black">
+                  <label
+                    htmlFor="hours"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Ticket Number
+                  </label>
+                  <input
+                    onChange={(e) => {
+                      setTickets(e.target.value);
+                    }}
+                    required
+                    type="number"
+                    id="ticket_number"
+                    name="ticket_number"
+                    min="0"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
 
-              <table className="mt-6 w-full whitespace-nowrap text-left">
-                <colgroup>
-                  <col className="w-full sm:w-4/12" />
-                  <col className="lg:w-4/12" />
-                  <col className="lg:w-2/12" />
-                  <col className="lg:w-1/12" />
-                  <col className="lg:w-1/12" />
-                </colgroup>
-                <thead className="border-b border-white/10 text-sm/6 text-white">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
-                    >
-                      User
-                    </th>
-                    <th
-                      scope="col"
-                      className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
-                    >
-                      Email
-                    </th>
-                    <th
-                      scope="col"
-                      className="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20"
-                    >
-                      Eligibility
-                    </th>
-                    <th
-                      scope="col"
-                      className="hidden py-2 pl-0 pr-4 text-center font-semibold sm:table-cell sm:pr-6 lg:pr-8 "
-                    >
-                      ID
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {data.map((user) => (
-                    <tr key={user.name} className="text-sm/6">
-                      <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
-                        <div className="flex items-center gap-x-4">
-                          {/* <img
-                            alt=""
-                            src={user.imageUrl}
-                            className="size-8 rounded-full bg-gray-800"
-                          /> */}
-                          <div className="truncate text-sm/6 font-medium text-white">
-                            {user.name}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
-                        {user.name}
-                      </td>
-                      <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
-                        {user.name}
-                      </td>
-                      <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell text-center">
-                        {user.id}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                <button
+                  type="button"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTicketSubmit(e);
+                  }}
+                >
+                  Set Ticket Number
+                </button>
+              </form>
             </div>
           </main>
         </div>
