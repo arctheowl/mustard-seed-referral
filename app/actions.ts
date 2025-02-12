@@ -7,7 +7,7 @@ export async function getData() {
     throw new Error("DATABASE_URL is not defined");
   }
   const sql = neon(process.env.DATABASE_URL);
-  const data = await sql`SELECT * FROM playing_with_neon ;`;
+  const data = await sql`SELECT * FROM Referral_Information ;`;
   return data;
 }
 
@@ -16,8 +16,9 @@ export async function insertData(userInfo: any) {
     throw new Error("DATABASE_URL is not defined");
   }
   const sql = neon(process.env.DATABASE_URL);
-  const data = await sql`INSERT INTO playing_with_neon(name, email, eligibility)
-VALUES (${userInfo.name}, ${userInfo.email}, true)
+  const data =
+    await sql`INSERT INTO Referral_Information(name, email, second_email, signposted, child_name, child_DOB, parent_name, sibling_names, sibling_ages, address, phone, school_name, school_year, diagnosis, diagnosis_date, medication, professionals, eligibility)
+VALUES (${userInfo.name}, ${userInfo.email}, ${userInfo.second_email}, ${userInfo.signposted}, ${userInfo.child_name}, ${userInfo.child_DOB}, ${userInfo.parent_name}, ${userInfo.sibling_names}, ${userInfo.sibling_ages}, ${userInfo.address}, ${userInfo.phone}, ${userInfo.school_name}, ${userInfo.school_year}, ${userInfo.diagnosis}, ${userInfo.diagnosis_date}, ${userInfo.medication}, ${userInfo.professionals}, ${userInfo.eligibility})
 RETURNING *;`;
   return data;
 }

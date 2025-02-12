@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { getCountDownTime, getData, getRemainingTickets } from "../actions";
 import Image from "next/image";
+import Modal from "../components/modal";
 
 const navigation = [
   { name: "Referrals", href: "#", icon: FolderIcon, current: false },
@@ -53,12 +54,27 @@ interface IUserData {
   name: string;
   eligibility: boolean;
   email: string;
+  secondEmail: string;
+  signposted: string;
+  childName: string;
+  childDOB: Date;
+  parentName: string;
+  siblings: string;
+  address: string;
+  phone: string;
+  schoolName: string;
+  schoolYear: string;
+  diagnosis: string;
+  diagnosisDate: Date;
+  medication: string;
+  professionals: string;
 }
 
 // function exportUserInfo(data: any) {
 const convertToCSV = (objArray: any) => {
   const array = typeof objArray !== "object" ? JSON.parse(objArray) : objArray;
-  let str = "id,name,value\r\n";
+  let str =
+    "id,name,email,second_email,signposted,child_name,child_dob,parent_name,sibling_names,sibling_ages,address,phone,school_name,school_year,diagnosis,diagnosis_date,medication,professionals,eligibility\r\n";
 
   for (let i = 0; i < array.length; i++) {
     let line = "";
@@ -96,6 +112,8 @@ export default function Dashboard() {
   const [data, setData] = useState<IUserData[]>([]);
   const [stats, setStats] = useState<any[]>([]);
   const [timeLive, setTimeLive] = useState<any>();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState<IUserData>();
   const currentTime = new Date().getTime();
   useEffect(() => {
     let countDownTimer = "";
@@ -130,6 +148,11 @@ export default function Dashboard() {
       ]);
     });
   }, []);
+
+  const handleInfoClick = (user: IUserData) => {
+    setUserInfo(user);
+    setModalOpen(!modalOpen);
+  };
 
   return (
     <>
@@ -348,7 +371,13 @@ export default function Dashboard() {
                 ))}
               </div>
             </header>
-
+            {modalOpen ? (
+              <Modal
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+                userInfo={userInfo}
+              ></Modal>
+            ) : null}
             {/* Activity list */}
             <div className="border-t border-white/10 pt-11">
               <div className="flex items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
@@ -367,14 +396,20 @@ export default function Dashboard() {
 
               <table className="mt-6 w-full whitespace-nowrap text-left">
                 <colgroup>
+                  <col className="lg:w-1/12" />
                   <col className="w-full sm:w-4/12" />
-                  <col className="lg:w-4/12" />
-                  <col className="lg:w-2/12" />
+                  <col className="lg:w-3/12" />
                   <col className="lg:w-1/12" />
                   <col className="lg:w-1/12" />
                 </colgroup>
                 <thead className="border-b border-white/10 text-sm/6 text-white">
                   <tr>
+                    <th
+                      scope="col"
+                      className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
+                    >
+                      Info
+                    </th>
                     <th
                       scope="col"
                       className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
@@ -403,14 +438,30 @@ export default function Dashboard() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {data.map((user) => (
-                    <tr key={user.name} className="text-sm/6">
+                    <tr key={user.name + user.id} className="text-sm/6">
+                      <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
+                        <button
+                          className="text-indigo-400 hover:text-indigo-500"
+                          onClick={() => handleInfoClick(user)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                            />
+                          </svg>
+                        </button>
+                      </td>
                       <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                         <div className="flex items-center gap-x-4">
-                          {/* <img
-                            alt=""
-                            src={user.imageUrl}
-                            className="size-8 rounded-full bg-gray-800"
-                          /> */}
                           <div className="truncate text-sm/6 font-medium text-white">
                             {user.name}
                           </div>
