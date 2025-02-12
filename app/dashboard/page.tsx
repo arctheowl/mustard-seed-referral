@@ -13,7 +13,7 @@ import {
   FolderIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { getCountDownTime, getData } from "../actions";
+import { getCountDownTime, getData, getRemainingTickets } from "../actions";
 import Image from "next/image";
 
 const navigation = [
@@ -99,6 +99,11 @@ export default function Dashboard() {
   const currentTime = new Date().getTime();
   useEffect(() => {
     let countDownTimer = "";
+    let serverTickets = "";
+    getRemainingTickets().then((data: any) => {
+      console.log("TICKET", data[0].ticket_number);
+      serverTickets = data[0].ticket_number;
+    });
     getCountDownTime().then((data: any) => {
       console.log(data[0].time.toString());
       countDownTimer = data[0]?.time.toString();
@@ -117,8 +122,8 @@ export default function Dashboard() {
           value: format(countDownTimer, "HH:mm:ss dd-MM-yyyy"),
         },
         {
-          name: "Success rate",
-          value: "98.5%",
+          name: "Remaing Referrals",
+          value: serverTickets,
         },
         {
           name: "Time Live",
@@ -415,10 +420,28 @@ export default function Dashboard() {
                         </div>
                       </td>
                       <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
-                        {user.name}
+                        {user.email}
                       </td>
                       <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
-                        {user.name}
+                        {user.eligibility ? (
+                          <span
+                            className={classNames(
+                              statuses.Completed,
+                              "inline-block px-2 py-0.5 text-xs/6 font-semibold rounded-full"
+                            )}
+                          >
+                            Eligible
+                          </span>
+                        ) : (
+                          <span
+                            className={classNames(
+                              statuses.Error,
+                              "inline-block px-2 py-0.5 text-xs/6 font-semibold rounded-full"
+                            )}
+                          >
+                            Not Eligible
+                          </span>
+                        )}
                       </td>
                       <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell text-center">
                         {user.id}

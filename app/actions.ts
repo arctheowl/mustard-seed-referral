@@ -11,6 +11,17 @@ export async function getData() {
   return data;
 }
 
+export async function insertData(userInfo: any) {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not defined");
+  }
+  const sql = neon(process.env.DATABASE_URL);
+  const data = await sql`INSERT INTO playing_with_neon(name, email, eligibility)
+VALUES (${userInfo.name}, ${userInfo.email}, true)
+RETURNING *;`;
+  return data;
+}
+
 export async function getCountDownTime() {
   if (!process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL is not defined");

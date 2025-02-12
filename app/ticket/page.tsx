@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getTicket } from "../actions";
+import { getTicket, insertData } from "../actions";
 import ProgressBar from "../components/progressBar";
 
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
     if (
@@ -24,6 +26,18 @@ export default function TicketPage() {
       setTicket(localStorage.getItem("mustardSeedReferralTicket") || "");
     }
   }, []);
+
+  const handleSubmit = (name: string, email: string) => {
+    const userInfo = {
+      name: name,
+      email: email,
+    };
+    console.log(userInfo);
+    insertData(userInfo).then((data: any) => {
+      console.log(data);
+    });
+  };
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-slate-200">
       <main className="flex flex-col row-start-2 items-center sm:items-start text-black">
@@ -42,6 +56,7 @@ export default function TicketPage() {
               <label className="block text-sm font-medium text-gray-700">
                 Name
                 <input
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
                   name="name"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -50,13 +65,17 @@ export default function TicketPage() {
               <label className="block text-sm font-medium text-gray-700 mt-4">
                 Email
                 <input
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   name="email"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </label>
               <button
-                type="submit"
+                type="button"
+                onClick={() => {
+                  handleSubmit(name, email);
+                }}
                 className="mt-6 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Submit

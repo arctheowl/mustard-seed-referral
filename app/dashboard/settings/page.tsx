@@ -240,7 +240,7 @@ export default function Dashboard() {
                     </div>
                     <h1 className="flex gap-x-3 text-base/7">
                       <span className="font-semibold text-white">
-                        Referral Dashboard
+                        Referral Dashboard Settings
                       </span>
                     </h1>
                   </div>
