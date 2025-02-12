@@ -14,7 +14,6 @@ export default function CountDown({ children }: any) {
   const [data, setData] = useState<string>("2025-01-08 21:49:00");
   useEffect(() => {
     getCountDownTime().then((data: any) => {
-      console.log(data);
       setData(data[0].time);
     });
   }, []);

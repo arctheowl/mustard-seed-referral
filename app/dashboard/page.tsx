@@ -101,16 +101,13 @@ export default function Dashboard() {
     let countDownTimer = "";
     let serverTickets = "";
     getRemainingTickets().then((data: any) => {
-      console.log("TICKET", data[0].ticket_number);
       serverTickets = data[0].ticket_number;
     });
     getCountDownTime().then((data: any) => {
-      console.log(data[0].time.toString());
       countDownTimer = data[0]?.time.toString();
     });
 
     getData().then((data: any) => {
-      console.log(data);
       setData(data);
       setStats([
         {

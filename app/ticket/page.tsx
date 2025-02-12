@@ -15,7 +15,6 @@ export default function TicketPage() {
       localStorage.getItem("mustardSeedReferralTicket") === ""
     ) {
       getTicket().then((data: any) => {
-        console.log(data);
         setTicket(data[0].ticket_number);
         localStorage.setItem(
           "mustardSeedReferralTicket",
@@ -32,10 +31,7 @@ export default function TicketPage() {
       name: name,
       email: email,
     };
-    console.log(userInfo);
-    insertData(userInfo).then((data: any) => {
-      console.log(data);
-    });
+    insertData(userInfo);
   };
 
   return (

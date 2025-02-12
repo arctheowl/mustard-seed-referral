@@ -80,8 +80,6 @@ export async function getTicket() {
   }
   const updatedData =
     await sql`UPDATE ticket_count SET ticket_number = ticket_number - 1 WHERE id = 1;`;
-
-  console.log(updatedData);
   return data;
 }
 
