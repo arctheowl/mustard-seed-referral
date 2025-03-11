@@ -32,10 +32,11 @@ const ConstFAQs = [
 
 function FAQs() {
   return (
-    <div className="flex flex-col items-center space-y-4 text-black pt-24">
+    <div className="flex flex-col items-center text-black pt-10 w-96">
+      <h1 className="underline text-3xl">FAQ's</h1>
       {ConstFAQs.map((faq, index) => (
         <Disclosure as="div" className="w-full max-w-md" key={index}>
-          <DisclosureButton className="group w-full border-b pb-2 text-left">
+          <DisclosureButton className="group w-full border-b pb-2 text-left flex justify-between items-center">
             {faq.question}
             <ChevronDownIcon className="w-5 group-data-[open]:rotate-180" />
           </DisclosureButton>
