@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { getTicket, insertData } from "../actions";
 import ProgressBar from "../components/progressBar";
 import { set } from "date-fns";
 
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
+  const [userInfo, setUserInfo] = useState<any>({});
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   // const [eligibility, setEligibility] = useState<boolean>(false);
@@ -42,8 +43,8 @@ export default function TicketPage() {
     }
   }, []);
 
-  const handleSubmit = (name: string, email: string) => {
-    const userInfo = {
+  useEffect(() => {
+    setUserInfo({
       name: name,
       email: email,
       secondEmail: secondEmail,
@@ -61,7 +62,27 @@ export default function TicketPage() {
       medication: medication,
       professionals: professionals,
       eligibility: true,
-    };
+    });
+  }, [
+    name,
+    email,
+    secondEmail,
+    signposted,
+    childName,
+    childDOB,
+    parentName,
+    siblings,
+    address,
+    phone,
+    schoolName,
+    schoolYear,
+    diagnosis,
+    diagnosisDate,
+    medication,
+    professionals,
+  ]);
+
+  const handleSubmit = (userInfo: any) => {
     console.log(userInfo);
     insertData(userInfo);
   };
@@ -274,7 +295,7 @@ export default function TicketPage() {
               <button
                 type="button"
                 onClick={() => {
-                  handleSubmit(name, email);
+                  handleSubmit(userInfo);
                 }}
                 className="mt-6 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
