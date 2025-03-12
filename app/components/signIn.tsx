@@ -32,8 +32,7 @@ export default function SignInPage() {
   ];
 
   return (
-    <>
-      <div className="grid grid-cols-2 min-h-full bg-white rounded">
+      <div className="grid grid-cols-2 bg-white rounded">
         <div className="relative hidden lg:block lg:flex-1">
           <Image src="/MustardSeed_Primary-Logo.png" alt="hero" layout="fill" />
         </div>
@@ -50,7 +49,7 @@ export default function SignInPage() {
             <div className="mt-10">
               <div>
                 <PostalCodeValidator />
-                <form action="#" method="POST" className="space-y-6">
+                <form action="/ticket" method="POST" className="space-y-6">
                   <fieldset>
                     <legend className="sr-only">
                       Eligibility Requirements
@@ -149,14 +148,6 @@ export default function SignInPage() {
                   <div>
                     <button
                       type="submit"
-                      // disabled={requirements.some(
-                      //   (requirement) =>
-                      //     !(
-                      //       document.getElementById(
-                      //         requirement.name
-                      //       ) as HTMLInputElement
-                      //     )?.checked
-                      // )}
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
                     >
                       Progress
@@ -222,6 +213,5 @@ export default function SignInPage() {
           />
         </div>
       </div>
-    </>
   );
 }

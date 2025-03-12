@@ -13,9 +13,7 @@ const Banner: React.FC<BannerProps> = ({ message, countdown }) => {
       <div className="w-1/2 center mx-auto">
         <h1 className="text-xl">{message}</h1>
         <div className="flex justify-center pt-10">
-          <CountDown>
-            <SignInPage />
-          </CountDown>
+          <CountDown />
         </div>
       </div>
     </div>

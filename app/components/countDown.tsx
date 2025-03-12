@@ -14,7 +14,7 @@ export default function CountDown({ children }: any) {
   }, []);
 
   return (
-    <FlipClockCountdown to={data} className="text-black">
+    <FlipClockCountdown to={data} className="text-black" onComplete={() => { window.location.href = ('/eligible') }}>
       <div className="-mt-28">{children}</div>
     </FlipClockCountdown>
   );
