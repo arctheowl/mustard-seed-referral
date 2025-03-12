@@ -36,7 +36,7 @@ export const SensorySkills = ({ }: SensorySkillsProps) => {
           Please indicate any areas of difficulty
           <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             {areasOfDifficulty.map((area) => (
-              <option>{area}</option>
+              <option key={area}>{area}</option>
             ))}
           </select>
         </label>
@@ -44,7 +44,7 @@ export const SensorySkills = ({ }: SensorySkillsProps) => {
           Any difficulties with daily life skills?
           <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             {dailyLifeSkills.map((area) => (
-              <option>{area}</option>
+              <option key={area}>{area}</option>
             ))}
           </select>
         </label>

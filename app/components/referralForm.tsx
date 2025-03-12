@@ -9,6 +9,8 @@ import { ChildInfo } from "./referralForm/ChildsInfo";
 import { FamilyInfo } from "./referralForm/FamilyInfo";
 import { DiagnosisInfo } from "./referralForm/Diagnosis";
 import { Section2 } from "./referralForm/Section2";
+import { ConsentInfo } from "./referralForm/Consent";
+import { Terms } from "./referralForm/Terms";
 
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
@@ -131,6 +133,8 @@ export default function TicketPage() {
               <FamilyInfo setParentName={setParentName} setSiblings={setSiblings} />
               <DiagnosisInfo setMedication={setMedication} setDiagnosis={setDiagnosis} setDiagnosisDate={setDiagnosisDate} setProfessionals={setProfessionals} />
               <Section2 />
+              <ConsentInfo />
+              <Terms />
               <button
                 type="button"
                 onClick={() => {
