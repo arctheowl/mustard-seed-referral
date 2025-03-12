@@ -204,7 +204,7 @@ export default function DashboardLayout({
                               className={classNames(
                                 item.current
                                   ? "bg-gray-800 text-black text-7xl"
-                                  : "text-black hover:bg-gray-800 hover:text-black",
+                                  : "text-black hover:bg-gray-200 hover:text-black",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                               )}
                             >
@@ -259,7 +259,7 @@ export default function DashboardLayout({
                           className={classNames(
                             item.current
                               ? "bg-gray-800 text-black"
-                              : "text-black hover:bg-gray-800 hover:text-black",
+                              : "text-black hover:bg-gray-400 hover:text-black",
                             "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                           )}
                         >
@@ -267,7 +267,7 @@ export default function DashboardLayout({
                             aria-hidden="true"
                             className="size-6 shrink-0"
                           />
-                          {item.name}
+                          <p className="text-2xl">{item.name}</p>
                         </a>
 
                       }
