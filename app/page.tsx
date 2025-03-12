@@ -27,7 +27,16 @@ export default function Home() {
           </div>
         </CountDown>
 
-        <div className="text-black pt-24 w-full flex">
+        <div className="text-black pt-24 w-full grid grid-cols-1 gap-4 place-items-center">
+          {/* <div className="col-span-1">
+            <Image
+              src="https://mustardseedautism.co.uk/wp-content/uploads/2024/08/pic.png"
+              alt="logo"
+              layout='fill'
+              objectFit='contain'
+              className="rounded-lg h-60 w-60"
+            />
+          </div> */}
           <FAQs2 />
         </div>
       </main>

@@ -24,7 +24,7 @@ export const DiagnosisInfo = ({ setMedication, setDiagnosis, setDiagnosisDate, s
             <option>Undiagnosed</option>
           </select>
         </label>
-        <label className="block text-sm font-medium text-gray-700 mt-4">
+        <label className="block text-sm font-medium text-gray-700">
           Date of Diagnosis
           <input
             onChange={(e) => setDiagnosisDate(e.target.value)}

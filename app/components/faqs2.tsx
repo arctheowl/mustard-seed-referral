@@ -26,7 +26,7 @@ const ConstFAQs = [
 
 export default function FAQs2() {
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-200 w-4/6 col-span-2">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <h2 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Frequently asked questions</h2>
         <dl className="mt-20 divide-y divide-gray-900/10">
