@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import Divider from "./divider";
 
 interface TermsProps {
@@ -5,11 +6,12 @@ interface TermsProps {
 }
 
 export const Terms = ({ }: TermsProps) => {
+  const router = useRouter()
   return (
     <div className="">
       <Divider title={"Terms and Conditions"} />
       <div className="gap-4 flex flex-col">
-        <form action="/submitted" method="POST">
+        <form onSubmit={async (e) => { e.preventDefault(); await router.push('/submitted'); }} method="POST">
           <label>
             Please list specific difficulties you would like support for:
             <p className="mt-1 whitespace-pre-line w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">

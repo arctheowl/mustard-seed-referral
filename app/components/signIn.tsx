@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import ProgressBar from "./progressBar";
 import Image from "next/image";
 import PostalCodeValidator from "./postcode";
+import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
+  
   useEffect(() => {
     requirements.map((requirement) => {
       return !(document.getElementById(requirement.name) as HTMLInputElement)
         ?.checked;
     });
   });
-  // const [isDisabled, setIsDisabled] = useState(true);
+
+  const router = useRouter()
+
   const requirements = [
     {
       id: "01",
@@ -49,7 +53,7 @@ export default function SignInPage() {
             <div className="mt-10">
               <div>
                 <PostalCodeValidator />
-                <form action="/ticket" method="POST" className="space-y-6">
+                <form action={() => router.push('/ticket')} method="POST" className="space-y-6" >
                   <fieldset>
                     <legend className="sr-only">
                       Eligibility Requirements
