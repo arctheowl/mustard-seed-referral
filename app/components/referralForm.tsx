@@ -28,6 +28,7 @@ export default function TicketPage() {
 
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(true);
 
   useEffect(() => {
     if (
@@ -105,13 +106,13 @@ export default function TicketPage() {
 
   return (
     <div>
-      { success && <Success message="Your form has been submitted correctly. You will now be redirected" /> }
-      { error && <Error /> }
+      { success && <Success message="Your form has been submitted correctly. You will now be redirected" show={false} setShow={setShow} /> }
+      { error && <Error show={false} setShow={setShow} message={"Your form has not been submitted correctly."} /> }
       <main className="flex flex-col items-center sm:items-start text-black">
         {parseInt(ticket) < 0 ? (
           <h1 className="">
             No more tickets available very sorry but you have been added to the
-            waitlist and you should also consider the following resources: 1)
+            waitlist and you should also consider the following resources: 1.
             Branches{" "}
           </h1>
         ) : (

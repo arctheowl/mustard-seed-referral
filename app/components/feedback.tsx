@@ -43,7 +43,7 @@ export function Success({ message, show, setShow }: IFeedback) {
   )
 }
 
-export function Error({ message }: IFeedback) {
+export function Error({ message, show, setShow }: IFeedback) {
   return (
     <div className="rounded-md bg-red-50 p-4 sticky top-0 z-50">
       <div className="flex">
