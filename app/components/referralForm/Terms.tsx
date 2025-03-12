@@ -9,27 +9,36 @@ export const Terms = ({ }: TermsProps) => {
     <div className="">
       <Divider title={"Terms and Conditions"} />
       <div className="gap-4 flex flex-col">
-        <label>
-          Please list specific difficulties you would like support for:
-          <p className="mt-1 whitespace-pre-line w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
-            {termsAndConditions}
-          </p>
-        </label>
-        <div className="mt-1 grid grid-cols-12 w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-          <p className="col-span-10">
-            I have read and agree to Mustard Seed's Terms and Conditions
-          </p>
-          <input
-            type="checkbox"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+        <form action="/submitted" method="POST">
+          <label>
+            Please list specific difficulties you would like support for:
+            <p className="mt-1 whitespace-pre-line w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
+              {termsAndConditions}
+            </p>
+          </label>
+          <div className="mt-1 grid grid-cols-12 w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
+            <p className="col-span-10">
+              I have read and agree to Mustard Seed's Terms and Conditions
+            </p>
+            <input
+              required
+              type="checkbox"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
           "/>
-        </div>
-        <label>
-          Privacy Notice:
-          <p className="mt-1 whitespace-pre-line w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
-            {privacyNotice}
-          </p>
-        </label>
+          </div>
+          <label>
+            Privacy Notice:
+            <p className="mt-1 whitespace-pre-line w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
+              {privacyNotice}
+            </p>
+          </label>
+          <button
+            type="submit"
+            className="mt-6 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </div>
 

@@ -1,7 +1,5 @@
 "use client";
 
-import SignInPage from "./components/signIn";
-import CountDown from "./components/countDown";
 import Banner from "./components/banner";
 import Image from "next/image";
 import FAQs2 from "./components/faqs2";

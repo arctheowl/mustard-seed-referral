@@ -101,10 +101,7 @@ export default function TicketPage() {
       .then(() => setSuccess(true))
       .then(() => localStorage.removeItem("mustardSeedReferralTicket"))
       .then(() => setTicket(""))
-      .then(async () => {
-        await delay(5000)
-        window.location.href = "/submitted"
-      })
+      .then(() => window.location.href = "/terms")
       .catch((err) => {
         setError(true)
         console.log(err)
@@ -134,7 +131,6 @@ export default function TicketPage() {
               <DiagnosisInfo setMedication={setMedication} setDiagnosis={setDiagnosis} setDiagnosisDate={setDiagnosisDate} setProfessionals={setProfessionals} />
               <Section2 />
               <ConsentInfo />
-              <Terms />
               <button
                 type="button"
                 onClick={() => {

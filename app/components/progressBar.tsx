@@ -1,21 +1,27 @@
 "use client";
 
 import { CheckIcon } from "@heroicons/react/24/solid";
-import { useEffect } from "react";
+import { useMemo } from "react";
 
 const steps = [
   { id: "01", name: "Eligibility", href: "#", status: "current" },
   { id: "02", name: "Application form", href: "#", status: "upcoming" },
-  { id: "03", name: "Preview", href: "#", status: "upcoming" },
+  { id: "03", name: "Terms and Conditions", href: "#", status: "upcoming" },
+  { id: "04", name: "Preview", href: "#", status: "upcoming" },
 ];
 
 export default function ProgressBar({ step }: { step: number }) {
-  useEffect(() => {
-    steps[step].status = "current";
-    if (step > 0) {
-      steps[0].status = "complete";
-    }
-  }, [step]);
+  useMemo(() => {
+    steps.map((s, index) => {
+      if (index < step) {
+        s.status = "complete";
+      } else if (index === step) {
+        s.status = "current";
+      } else {
+        s.status = "upcoming";
+      }
+    }); 
+  }, [step])
 
   return (
     <nav aria-label="Progress" className="flex items-center justify-center">
@@ -23,10 +29,10 @@ export default function ProgressBar({ step }: { step: number }) {
         role="list"
         className="divide-y divide-gray-300 rounded-md border border-gray-300 md:flex md:divide-y-0"
       >
-        {steps.map((step, stepIdx) => (
-          <li key={step.name} className="relative md:flex md:flex-1">
-            {step.status === "complete" ? (
-              <a href={step.href} className="group flex w-full items-center">
+        {steps.map((s, stepIdx) => (
+          <li key={s.name} className="relative md:flex md:flex-1">
+            {s.status === "complete" ? (
+              <a href={s.href} className="group flex w-full items-center">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
                     <CheckIcon
@@ -35,41 +41,40 @@ export default function ProgressBar({ step }: { step: number }) {
                     />
                   </span>
                   <span className="ml-4 text-sm font-medium text-gray-900">
-                    {step.name}
+                    {s.name}
                   </span>
                 </span>
               </a>
-            ) : step.status === "current" ? (
+            ) : s.status === "current" ? (
               <a
-                href={step.href}
+                href={s.href}
                 aria-current="step"
                 className="flex items-center px-6 py-4 text-sm font-medium"
               >
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-indigo-600">
-                  <span className="text-indigo-600">{step.id}</span>
+                  <span className="text-indigo-600">{s.id}</span>
                 </span>
                 <span className="ml-4 text-sm font-medium text-indigo-600">
-                  {step.name}
+                  {s.name}
                 </span>
               </a>
             ) : (
               <a
-                href={step.href}
+                href={s.href}
                 className="group flex items-center cursor-not-allowed"
               >
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                     <span className="text-gray-500 group-hover:text-gray-900">
-                      {step.id}
+                      {s.id}
                     </span>
                   </span>
                   <span className="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">
-                    {step.name}
+                    {s.name}
                   </span>
                 </span>
               </a>
             )}
-
             {stepIdx !== steps.length - 1 ? (
               <>
                 {/* Arrow separator for lg screens and up */}
