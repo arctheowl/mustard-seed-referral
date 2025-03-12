@@ -1,10 +1,14 @@
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
 import { XCircleIcon } from '@heroicons/react/20/solid'
 import { InformationCircleIcon } from '@heroicons/react/20/solid'
-import { useState } from 'react'
 
-export function Success() {
-  const [show, setShow] = useState(true)
+interface IFeedback {
+  show: boolean
+  setShow: (show: boolean) => void
+  message: string
+}
+
+export function Success({ message, show, setShow }: IFeedback) {
   return (
     <div className={`rounded-md bg-green-50 p-4 sticky top-0 z-50 ${show ? '' : 'hidden'}`}>
       <div className="flex">
@@ -14,7 +18,7 @@ export function Success() {
         <div className="ml-3">
           <h3 className="text-sm font-medium text-green-800">Success!</h3>
           <div className="mt-2 text-sm text-green-700">
-            <p>Your form has been submitted correctly. You will now be redirected</p>
+            <p>{message}</p>
           </div>
           <div className="mt-4">
             <div className="-mx-2 -my-1.5 flex">
@@ -39,7 +43,7 @@ export function Success() {
   )
 }
 
-export function Error() {
+export function Error({ message }: IFeedback) {
   return (
     <div className="rounded-md bg-red-50 p-4 sticky top-0 z-50">
       <div className="flex">
@@ -47,12 +51,9 @@ export function Error() {
           <XCircleIcon aria-hidden="true" className="size-5 text-red-400" />
         </div>
         <div className="ml-3">
-          <h3 className="text-sm font-medium text-red-800">There were 2 errors with your submission</h3>
+          <h3 className="text-sm font-medium text-red-800">There was an Error with this action</h3>
           <div className="mt-2 text-sm text-red-700">
-            <ul role="list" className="list-disc space-y-1 pl-5">
-              <li>Your password must be at least 8 characters</li>
-              <li>Your password must include at least one pro wrestling finishing move</li>
-            </ul>
+            <p>{message}</p>
           </div>
         </div>
       </div>

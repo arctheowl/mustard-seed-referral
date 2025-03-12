@@ -20,7 +20,8 @@ import {
   setActionsTickets,
 } from "@/app/actions";
 import Image from "next/image";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
+import { Success, Error } from "@/app/components/feedback";
 
 const navigation = [
   { name: "Referrals", href: "/dashboard", icon: FolderIcon, current: false },
@@ -65,6 +66,10 @@ export default function Dashboard() {
   const [stats, setStats] = useState<any[]>([]);
   const currentTime = new Date().getTime();
 
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [show, setShow] = useState(true);
+
   useEffect(() => {
     let countDownTimer = "";
     let serverTickets = "";
@@ -101,17 +106,29 @@ export default function Dashboard() {
 
   const handleTimeSubmit = (e: any) => {
     e.preventDefault();
-    adjustCountDownTime(`${date} ${hours}`);
+    setShow(true);
+    adjustCountDownTime(`${date} ${hours}`).then(() => {
+      setSuccess(true);
+    }).catch((err) => {
+      setError(true);
+      console.log(err);
+    });
   };
 
   const handleTicketSubmit = (e: any) => {
     e.preventDefault();
-    setActionsTickets(tickets);
+    setShow(true);
+    setActionsTickets(tickets).then(() => {
+      setSuccess(true);
+    }).catch((err) => {
+      setError(true);
+      console.log(err);
+    });
   };
 
   return (
     <>
-      <div>
+      <div className="flex h-screen bg-gray-800 text-white">
         <Dialog
           open={sidebarOpen}
           onClose={setSidebarOpen}
@@ -256,8 +273,8 @@ export default function Dashboard() {
                       statIdx % 2 === 1
                         ? "sm:border-l"
                         : statIdx === 2
-                        ? "lg:border-l"
-                        : "",
+                          ? "lg:border-l"
+                          : "",
                       "border-t border-white/5 px-4 py-6 sm:px-6 lg:px-8"
                     )}
                   >
@@ -278,12 +295,14 @@ export default function Dashboard() {
                 ))}
               </div>
             </header>
+            {success ? (<Success message="Data has been successfully updated" show={show} setShow={setShow} />) : null}
+            {error ? (<Error message="Data has been successfully updated" show={show} setShow={setShow} />) : null}
             <div className="flex w-full gap-x-4 px-4 py-4 sm:px-6 lg:px-8">
               <form>
                 <div className="mb-4 text-black">
                   <label
                     htmlFor="date"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-white"
                   >
                     Date
                   </label>
@@ -298,7 +317,7 @@ export default function Dashboard() {
                   />
                   <label
                     htmlFor="hours"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-white"
                   >
                     Time
                   </label>
@@ -330,7 +349,7 @@ export default function Dashboard() {
                 <div className="mb-4 text-black">
                   <label
                     htmlFor="hours"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-white"
                   >
                     Ticket Number
                   </label>

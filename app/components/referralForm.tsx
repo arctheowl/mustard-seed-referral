@@ -105,7 +105,7 @@ export default function TicketPage() {
 
   return (
     <div>
-      { success && <Success /> }
+      { success && <Success message="Your form has been submitted correctly. You will now be redirected" /> }
       { error && <Error /> }
       <main className="flex flex-col items-center sm:items-start text-black">
         {parseInt(ticket) < 0 ? (

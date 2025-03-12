@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProgressBar from "./progressBar";
 import Image from "next/image";
+import PostalCodeValidator from "./postcode";
 
 export default function SignInPage() {
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function SignInPage() {
 
             <div className="mt-10">
               <div>
+                <PostalCodeValidator />
                 <form action="#" method="POST" className="space-y-6">
                   <fieldset>
                     <legend className="sr-only">
