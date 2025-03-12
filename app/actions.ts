@@ -20,6 +20,7 @@ export async function insertData(userInfo: any) {
     await sql`INSERT INTO Referral_Information(name, email, second_email, signposted, child_name, child_DOB, parent_name, sibling_names, sibling_ages, address, phone, school_name, school_year, diagnosis, diagnosis_date, medication, professionals, eligibility)
 VALUES (${userInfo.name}, ${userInfo.email}, ${userInfo.second_email}, ${userInfo.signposted}, ${userInfo.child_name}, ${userInfo.child_DOB}, ${userInfo.parent_name}, ${userInfo.sibling_names}, ${userInfo.sibling_ages}, ${userInfo.address}, ${userInfo.phone}, ${userInfo.school_name}, ${userInfo.school_year}, ${userInfo.diagnosis}, ${userInfo.diagnosis_date}, ${userInfo.medication}, ${userInfo.professionals}, ${userInfo.eligibility})
 RETURNING *;`;
+  console.log(data);
   return data;
 }
 

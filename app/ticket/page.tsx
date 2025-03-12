@@ -40,7 +40,7 @@ export default function Example() {
         {parseInt(ticket) < 0 ? (
           <h1 className="">
             No more tickets available very sorry but you have been added to the
-            waitlist and you should also consider the following resources: 1)
+            waitlist and you should also consider the following resources: 1.
             Branches{" "}
           </h1>
         ) : (

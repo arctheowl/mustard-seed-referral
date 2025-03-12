@@ -1,9 +1,9 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getTicket, insertData } from "../actions";
 import ProgressBar from "../components/progressBar";
-import { set } from "date-fns";
+import { Success, Error } from "./feedback";
 
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
@@ -25,6 +25,9 @@ export default function TicketPage() {
   const [medication, setMedication] = useState<string>("");
   const [professionals, setProfessionals] = useState<string>("");
   const [secondEmail, setSecondEmail] = useState<string>("");
+
+  const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     if (
@@ -82,13 +85,28 @@ export default function TicketPage() {
     professionals,
   ]);
 
+  const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
+
   const handleSubmit = (userInfo: any) => {
     console.log(userInfo);
-    insertData(userInfo);
+    console.log(insertData(userInfo)
+      .then(() => setSuccess(true))
+      .then(() => localStorage.removeItem("mustardSeedReferralTicket"))
+      .then(() => setTicket(""))
+      .then(async () => {
+        await delay(5000)
+        window.location.href = "/submitted"
+      })
+      .catch((err) => {
+        setError(true)
+        console.log(err)
+      }));
   };
 
   return (
     <div>
+      { success && <Success /> }
+      { error && <Error /> }
       <main className="flex flex-col items-center sm:items-start text-black">
         {parseInt(ticket) < 0 ? (
           <h1 className="">
