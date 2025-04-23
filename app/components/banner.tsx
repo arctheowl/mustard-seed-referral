@@ -1,6 +1,5 @@
 import React from "react";
 import CountDown from "./countDown";
-import SignInPage from "./signIn";
 
 interface BannerProps {
   message: string;

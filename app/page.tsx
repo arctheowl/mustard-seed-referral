@@ -20,7 +20,7 @@ export default function Home() {
         </h1>
       </div>
       <Banner
-        message="There is no need to refresh this page, you will automatically receive a random queue position when the countdown finishes. Please do not navigate away. Users who join the queue after the countdown has finished will be added to the end of the queue."
+        message="There is no need to refresh this page, you will automatically receive a random queue position when the countdown finishes. The wait room will be live at 6:00 PM on the 30th of April. Please do not navigate away after this time."
         countdown={10}
       />
       <FAQs2 />

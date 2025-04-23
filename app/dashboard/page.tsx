@@ -36,7 +36,7 @@ const secondaryNavigation = [
 ];
 
 const statuses = {
-  Completed: "text-green-400 bg-green-400/10",
+  Completed: "text-green-700 bg-green-400/20",
   Error: "text-rose-400 bg-rose-400/10",
 };
 
@@ -168,7 +168,7 @@ export default function Dashboard() {
             onClick={() => {
               downloadCSV(data);
             }}
-            className="order-first flex-none rounded-full bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30 sm:order-none sm:px-4 lg:px-6 "
+            className="order-first flex-none rounded-full bg-green-500 px-2 py-1 text-xs font-medium text-black ring-1 ring-inset ring-indigo-400/30 sm:order-none sm:px-4 lg:px-6 hover:bg-green-600"
           >
             Export
           </button>
