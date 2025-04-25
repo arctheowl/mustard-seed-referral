@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { format } from "date-fns";
 import {
   Dialog,
@@ -18,6 +18,7 @@ import {
   getCountDownTime,
   getReferrals,
   getRemainingTickets,
+  getWaitlist,
 } from "../actions";
 import Image from "next/image";
 
@@ -44,6 +45,15 @@ const statuses = {
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
+}
+
+interface IWaitlistData {
+  id: string;
+  name: string;
+  eligibility: boolean;
+  email: string;
+  childName: string;
+  childDOB: Date;
 }
 
 interface IUserData {
@@ -111,11 +121,13 @@ export default function DashboardLayout({
 }>) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState<IUserData[]>([]);
+  const [waitlistData, setWaitlistData] = useState<IWaitlistData[]>([]);
   const [stats, setStats] = useState<any[]>([]);
   const [timeLive, setTimeLive] = useState<any>();
   const [modalOpen, setModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<IUserData>();
   const currentTime = new Date().getTime();
+
   useEffect(() => {
     let countDownTimer = "";
     let serverTickets = "";
@@ -124,6 +136,10 @@ export default function DashboardLayout({
     });
     getCountDownTime().then((data: any) => {
       countDownTimer = data[0]?.time.toString();
+    });
+    getWaitlist().then((data: any) => {
+      setWaitlistData(data);
+      console.log("Waitlist", data);
     });
 
     getReferrals().then((data: any) => {
@@ -134,12 +150,16 @@ export default function DashboardLayout({
           value: data.length.toString(),
         },
         {
-          name: "Count Down Timer",
-          value: format(countDownTimer, "HH:mm:ss dd-MM-yyyy"),
-        },
-        {
           name: "Remaing Referrals",
           value: serverTickets,
+        },
+        {
+          name: "Waitlist",
+          value: waitlistData.length.toString(),
+        },
+        {
+          name: "Count Down Timer",
+          value: format(countDownTimer, "HH:mm:ss dd-MM-yyyy"),
         },
         {
           name: "Time Live",
@@ -312,7 +332,7 @@ export default function DashboardLayout({
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-5">
               {stats.map((stat, statIdx) => (
                 <div
                   key={stat.name}

@@ -52,7 +52,7 @@ const downloadCSV = (data: any) => {
   const csvURL = URL.createObjectURL(csvData);
   const link = document.createElement("a");
   link.href = csvURL;
-  link.download = `referral_export.csv`;
+  link.download = `waitlist_export.csv`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

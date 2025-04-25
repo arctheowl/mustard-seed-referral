@@ -46,7 +46,7 @@ export default function WaitlistModal({
                   as="h3"
                   className="text-base font-semibold text-gray-900"
                 >
-                  Referral Information
+                  Waitlist Information
                 </DialogTitle>
                 <div className="mt-2 flex-col text-black items-center">
                   <p>Parent/Guardian Name: {userInfo.name}</p>

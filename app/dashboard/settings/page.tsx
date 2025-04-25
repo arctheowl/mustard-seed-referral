@@ -15,7 +15,7 @@ import {
 import {
   adjustCountDownTime,
   getCountDownTime,
-  getData,
+  getReferrals,
   getRemainingTickets,
   setActionsTickets,
 } from "@/app/actions";
@@ -75,7 +75,7 @@ export default function Dashboard() {
       countDownTimer = data[0]?.time.toString();
     });
 
-    getData().then((data: any) => {
+    getReferrals().then((data: any) => {
       setData(data);
       setStats([
         {
@@ -102,30 +102,45 @@ export default function Dashboard() {
   const handleTimeSubmit = (e: any) => {
     e.preventDefault();
     setShow(true);
-    adjustCountDownTime(`${date} ${hours}`).then(() => {
-      setSuccess(true);
-    }).catch((err) => {
-      setError(true);
-      console.log(err);
-    });
+    adjustCountDownTime(`${date} ${hours}`)
+      .then(() => {
+        setSuccess(true);
+      })
+      .catch((err) => {
+        setError(true);
+        console.log(err);
+      });
   };
 
   const handleTicketSubmit = (e: any) => {
     e.preventDefault();
     setShow(true);
-    setActionsTickets(tickets).then(() => {
-      setSuccess(true);
-    }).catch((err) => {
-      setError(true);
-      console.log(err);
-    });
+    setActionsTickets(tickets)
+      .then(() => {
+        setSuccess(true);
+      })
+      .catch((err) => {
+        setError(true);
+        console.log(err);
+      });
   };
 
   return (
     <>
-
-      {success ? (<Success message="Data has been successfully updated" show={show} setShow={setShow} />) : null}
-      {error ? (<Error message="Data has been successfully updated" show={show} setShow={setShow} />) : null}
+      {success ? (
+        <Success
+          message="Data has been successfully updated"
+          show={show}
+          setShow={setShow}
+        />
+      ) : null}
+      {error ? (
+        <Error
+          message="Data has been successfully updated"
+          show={show}
+          setShow={setShow}
+        />
+      ) : null}
       <div className="flex w-full gap-x-4 px-4 py-4 sm:px-6 lg:px-8 border-t border-black">
         <form>
           <div className="mb-4 text-black">
@@ -207,7 +222,6 @@ export default function Dashboard() {
           </button>
         </form>
       </div>
-
     </>
   );
 }
