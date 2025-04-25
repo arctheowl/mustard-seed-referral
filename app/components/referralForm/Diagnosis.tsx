@@ -7,7 +7,12 @@ interface PersonalInfoProps {
   setProfessionals: (professionals: string) => void;
 }
 
-export const DiagnosisInfo = ({ setMedication, setDiagnosis, setDiagnosisDate, setProfessionals }: PersonalInfoProps) => {
+export const DiagnosisInfo = ({
+  setMedication,
+  setDiagnosis,
+  setDiagnosisDate,
+  setProfessionals,
+}: PersonalInfoProps) => {
   return (
     <div className="">
       <Divider title={"Diagnosis Information"} />
@@ -60,6 +65,5 @@ export const DiagnosisInfo = ({ setMedication, setDiagnosis, setDiagnosisDate, s
         </select>
       </label>
     </div>
-
-  )
-}
+  );
+};

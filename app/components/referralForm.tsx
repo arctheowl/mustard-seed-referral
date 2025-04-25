@@ -10,7 +10,6 @@ import { FamilyInfo } from "./referralForm/FamilyInfo";
 import { DiagnosisInfo } from "./referralForm/Diagnosis";
 import { Section2 } from "./referralForm/Section2";
 import { ConsentInfo } from "./referralForm/Consent";
-import { Terms } from "./referralForm/Terms";
 
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
@@ -93,25 +92,39 @@ export default function TicketPage() {
     professionals,
   ]);
 
-  const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
+  const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
 
   const handleSubmit = (userInfo: any) => {
     console.log(userInfo);
-    console.log(insertData(userInfo)
-      .then(() => setSuccess(true))
-      .then(() => localStorage.removeItem("mustardSeedReferralTicket"))
-      .then(() => setTicket(""))
-      .then(() => window.location.href = "/terms")
-      .catch((err) => {
-        setError(true)
-        console.log(err)
-      }));
+    console.log(
+      insertData(userInfo)
+        .then(() => setSuccess(true))
+        .then(() => localStorage.removeItem("mustardSeedReferralTicket"))
+        .then(() => setTicket(""))
+        .then(() => (window.location.href = "/terms"))
+        .catch((err) => {
+          setError(true);
+          console.log(err);
+        })
+    );
   };
 
   return (
     <div>
-      {success && <Success message="Your form has been submitted correctly. You will now be redirected" show={false} setShow={setShow} />}
-      {error && <Error show={false} setShow={setShow} message={"Your form has not been submitted correctly."} />}
+      {success && (
+        <Success
+          message="Your form has been submitted correctly. You will now be redirected"
+          show={false}
+          setShow={setShow}
+        />
+      )}
+      {error && (
+        <Error
+          show={false}
+          setShow={setShow}
+          message={"Your form has not been submitted correctly."}
+        />
+      )}
       <main className="flex flex-col items-center sm:items-start text-black">
         {parseInt(ticket) < 0 ? (
           <h1 className="">
@@ -123,12 +136,33 @@ export default function TicketPage() {
           <div>
             <ProgressBar step={1} />
             <form className="mb-4 w-1/2 mx-auto">
-              <h1 className="">This is your ticket number {ticket}</h1>
-              <h1 className="text-6xl">Referral Form</h1>
-              <PersonalInfo setName={setName} setEmail={setEmail} setSecondEmail={setSecondEmail} setAddress={setAddress} setPhone={setPhone} setSignposted={setSignposted} />
-              <ChildInfo setChildName={setChildName} setChildDOB={setChildDOB} setParentName={setParentName} setSiblings={setSiblings} setSchoolName={setSchoolName} setSchoolYear={setSchoolYear} />
-              <FamilyInfo setParentName={setParentName} setSiblings={setSiblings} />
-              <DiagnosisInfo setMedication={setMedication} setDiagnosis={setDiagnosis} setDiagnosisDate={setDiagnosisDate} setProfessionals={setProfessionals} />
+              <h1 className="text-6xl pt-10">Referral Form</h1>
+              <PersonalInfo
+                setName={setName}
+                setEmail={setEmail}
+                setSecondEmail={setSecondEmail}
+                setAddress={setAddress}
+                setPhone={setPhone}
+                setSignposted={setSignposted}
+              />
+              <ChildInfo
+                setChildName={setChildName}
+                setChildDOB={setChildDOB}
+                setParentName={setParentName}
+                setSiblings={setSiblings}
+                setSchoolName={setSchoolName}
+                setSchoolYear={setSchoolYear}
+              />
+              <FamilyInfo
+                setParentName={setParentName}
+                setSiblings={setSiblings}
+              />
+              <DiagnosisInfo
+                setMedication={setMedication}
+                setDiagnosis={setDiagnosis}
+                setDiagnosisDate={setDiagnosisDate}
+                setProfessionals={setProfessionals}
+              />
               <Section2 />
               <ConsentInfo />
               <button

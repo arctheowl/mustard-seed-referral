@@ -7,8 +7,8 @@ import { getCountDownTime } from "../actions";
 import { useRouter } from "next/navigation";
 
 export default function CountDown({ children }: any) {
-  const router = useRouter()
-  const [data, setData] = useState<string>("2025-03-28 21:49:00");
+  const router = useRouter();
+  const [data, setData] = useState<string>("2025-04-30 21:49:00");
   useEffect(() => {
     getCountDownTime().then((data: any) => {
       setData(data[0].time);
@@ -16,7 +16,11 @@ export default function CountDown({ children }: any) {
   }, []);
 
   return (
-    <FlipClockCountdown to={data} className="text-black" onComplete={() => router.push('/eligible')}>
+    <FlipClockCountdown
+      to={data}
+      className="text-black"
+      onComplete={() => router.push("/eligible")}
+    >
       <div className="-mt-28">{children}</div>
     </FlipClockCountdown>
   );
