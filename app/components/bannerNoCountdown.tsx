@@ -5,7 +5,7 @@ const BannerNoCountdown = () => {
     <div className="rounded text-center bg-green-400 text-black p-4 h-1/2 top-48">
       <div className="w-1/2 center mx-auto">
         <h1 className="text-xl">
-          "Unfortunately have been unsuccessful in obtaining a place. If you
+          Unfortunately you have been unsuccessful in obtaining a place. If you
           have previously not been added to our waitlist then feel free to enter
           your details below to be added to our waitlist.
           <p className="py-10">
