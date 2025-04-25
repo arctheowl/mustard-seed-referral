@@ -3,41 +3,13 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  TransitionChild,
-} from "@headlessui/react";
-import {
-  Cog6ToothIcon,
-  FolderIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
   getCountDownTime,
   getReferrals,
   getRemainingTickets,
-} from "../actions";
-import Image from "next/image";
-import Modal from "../components/modal";
-
-const navigation = [
-  { name: "Referrals", href: "#", icon: FolderIcon, current: false },
-  {
-    name: "Settings",
-    href: "dashboard/settings",
-    icon: Cog6ToothIcon,
-    current: false,
-  },
-];
-
-const secondaryNavigation = [
-  { name: "Overview", href: "#", current: true },
-  { name: "Activity", href: "#", current: false },
-  { name: "Settings", href: "#", current: false },
-  { name: "Collaborators", href: "#", current: false },
-  { name: "Notifications", href: "#", current: false },
-];
+  getWaitlist,
+} from "../../actions";
+import Modal from "../../components/modal";
+import WaitlistModal from "@/app/components/waitlistModal";
 
 const statuses = {
   Completed: "text-green-700 bg-green-400/20",
@@ -48,25 +20,13 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-interface IUserData {
+interface IWaitlistData {
   id: string;
   name: string;
   eligibility: boolean;
   email: string;
-  secondEmail: string;
-  signposted: string;
   childName: string;
   childDOB: Date;
-  parentName: string;
-  siblings: string;
-  address: string;
-  phone: string;
-  schoolName: string;
-  schoolYear: string;
-  diagnosis: string;
-  diagnosisDate: Date;
-  medication: string;
-  professionals: string;
 }
 
 // function exportUserInfo(data: any) {
@@ -97,22 +57,13 @@ const downloadCSV = (data: any) => {
   link.click();
   document.body.removeChild(link);
 };
-// const fileData = JSON.stringify(userInfo);
-// const blob = new Blob([fileData], { type: "text/csv" });
-// const url = URL.createObjectURL(blob);
-// const link = document.createElement("a");
-// link.download = "referral_export.csv";
-// link.href = url;
-// link.click();
-// }
 
 export default function Dashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [data, setData] = useState<IUserData[]>([]);
+  const [data, setData] = useState<IWaitlistData[]>([]);
   const [stats, setStats] = useState<any[]>([]);
   const [timeLive, setTimeLive] = useState<any>();
   const [modalOpen, setModalOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState<IUserData>();
+  const [userInfo, setUserInfo] = useState<IWaitlistData>();
   const currentTime = new Date().getTime();
   useEffect(() => {
     let countDownTimer = "";
@@ -124,7 +75,7 @@ export default function Dashboard() {
       countDownTimer = data[0]?.time.toString();
     });
 
-    getReferrals().then((data: any) => {
+    getWaitlist().then((data: any) => {
       setData(data);
       setStats([
         {
@@ -148,19 +99,21 @@ export default function Dashboard() {
     });
   }, []);
 
-  const handleInfoClick = (user: IUserData) => {
+  const handleInfoClick = (user: IWaitlistData) => {
     setUserInfo(user);
     setModalOpen(!modalOpen);
   };
 
+  console.log("Data", data);
+
   return (
     <>
       {modalOpen ? (
-        <Modal
+        <WaitlistModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           userInfo={userInfo}
-        ></Modal>
+        ></WaitlistModal>
       ) : null}
       {/* Activity list */}
       <div className="border-t border-black pt-11">
@@ -198,13 +151,25 @@ export default function Dashboard() {
                 scope="col"
                 className="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
               >
-                Parent/Guardian
+                Parent/Guardian Name
               </th>
               <th
                 scope="col"
                 className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
               >
                 Email
+              </th>
+              <th
+                scope="col"
+                className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
+              >
+                Postcode
+              </th>
+              <th
+                scope="col"
+                className="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
+              >
+                Child DOB
               </th>
               <th
                 scope="col"
@@ -221,7 +186,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
-            {data.map((user) => (
+            {data.map((user: any) => (
               <tr key={user.name + user.id} className="text-sm/6">
                 <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                   <button
@@ -253,6 +218,12 @@ export default function Dashboard() {
                 </td>
                 <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
                   {user.email}
+                </td>
+                <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
+                  {user.postcode}
+                </td>
+                <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
+                  {user.child_dob}
                 </td>
                 <td className="hidden py-4 pl-0 pr-8 text-sm/6 sm:table-cell">
                   {user.eligibility ? (

@@ -2,12 +2,21 @@
 "use server";
 import { neon } from "@neondatabase/serverless";
 
-export async function getData() {
+export async function getReferrals() {
   if (!process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL is not defined");
   }
   const sql = neon(process.env.DATABASE_URL);
   const data = await sql`SELECT * FROM Referral_Information ;`;
+  return data;
+}
+
+export async function getWaitlist() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not defined");
+  }
+  const sql = neon(process.env.DATABASE_URL);
+  const data = await sql`SELECT * FROM waitlist ;`;
   return data;
 }
 
@@ -85,4 +94,17 @@ export async function getTicket() {
   return data;
 }
 
+export async function insertWaitlist(waitlistInfo: any) {
+  console.log(waitlistInfo);
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not defined");
+  }
+  const sql = neon(process.env.DATABASE_URL);
+  const data =
+    await sql`INSERT INTO waitlist(name, email, postcode, child_dob, child_name)
+VALUES (${waitlistInfo.parentName}, ${waitlistInfo.email}, ${waitlistInfo.postalCode}, ${waitlistInfo.childDOB} , ${waitlistInfo.childName})
+RETURNING *;`;
+  console.log(data);
+  return data;
+}
 //"Stage 1"

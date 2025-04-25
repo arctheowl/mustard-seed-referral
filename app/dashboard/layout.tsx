@@ -12,12 +12,23 @@ import {
   Cog6ToothIcon,
   FolderIcon,
   XMarkIcon,
+  EnvelopeIcon,
 } from "@heroicons/react/24/outline";
-import { getCountDownTime, getData, getRemainingTickets } from "../actions";
+import {
+  getCountDownTime,
+  getReferrals,
+  getRemainingTickets,
+} from "../actions";
 import Image from "next/image";
 
 const navigation = [
   { name: "Referrals", href: "/dashboard", icon: FolderIcon, current: false },
+  {
+    name: "Waitlist",
+    href: "/dashboard/waitlist",
+    icon: EnvelopeIcon,
+    current: false,
+  },
   {
     name: "Settings",
     href: "/dashboard/settings",
@@ -25,7 +36,6 @@ const navigation = [
     current: false,
   },
 ];
-
 
 const statuses = {
   Completed: "text-green-400 bg-green-400/10",
@@ -116,7 +126,7 @@ export default function DashboardLayout({
       countDownTimer = data[0]?.time.toString();
     });
 
-    getData().then((data: any) => {
+    getReferrals().then((data: any) => {
       setData(data);
       setStats([
         {
@@ -170,10 +180,7 @@ export default function DashboardLayout({
                   className="-m-2.5 p-2.5"
                 >
                   <span className="sr-only">Close sidebar</span>
-                  <XMarkIcon
-                    aria-hidden="true"
-                    className="size-6 text-black"
-                  />
+                  <XMarkIcon aria-hidden="true" className="size-6 text-black" />
                 </button>
               </div>
             </TransitionChild>
@@ -192,13 +199,16 @@ export default function DashboardLayout({
                     <ul role="list" className="-mx-2 space-y-1">
                       {navigation.map((item) => (
                         <li key={item.name}>
-                          {item.current ?
-                            <a href="#">   <item.icon
-                              aria-hidden="true"
-                              className="size-6 shrink-0"
-                            />
+                          {item.current ? (
+                            <a href="#">
+                              {" "}
+                              <item.icon
+                                aria-hidden="true"
+                                className="size-6 shrink-0"
+                              />
                               {item.name}
-                            </a> :
+                            </a>
+                          ) : (
                             <a
                               href={item.href}
                               className={classNames(
@@ -214,9 +224,7 @@ export default function DashboardLayout({
                               />
                               {item.name}
                             </a>
-
-                          }
-
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -247,13 +255,16 @@ export default function DashboardLayout({
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map((item) => (
                     <li key={item.name}>
-                      {item.current ?
-                        <a href="#">   <item.icon
-                          aria-hidden="true"
-                          className="size-6 shrink-0"
-                        />
+                      {item.current ? (
+                        <a href="#">
+                          {" "}
+                          <item.icon
+                            aria-hidden="true"
+                            className="size-6 shrink-0"
+                          />
                           {item.name}
-                        </a> :
+                        </a>
+                      ) : (
                         <a
                           href={item.href}
                           className={classNames(
@@ -269,9 +280,7 @@ export default function DashboardLayout({
                           />
                           <p className="text-2xl">{item.name}</p>
                         </a>
-
-                      }
-
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -311,8 +320,8 @@ export default function DashboardLayout({
                     statIdx % 2 === 1
                       ? "sm:border-l"
                       : statIdx === 2
-                        ? "lg:border-l"
-                        : "",
+                      ? "lg:border-l"
+                      : "",
                     "border-t border-black px-4 py-6 sm:px-6 lg:px-8"
                   )}
                 >
@@ -324,9 +333,7 @@ export default function DashboardLayout({
                       {stat.value}
                     </span>
                     {stat.unit ? (
-                      <span className="text-sm text-black">
-                        {stat.unit}
-                      </span>
+                      <span className="text-sm text-black">{stat.unit}</span>
                     ) : null}
                   </p>
                 </div>

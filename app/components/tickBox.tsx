@@ -1,17 +1,25 @@
-
 interface Requirement {
   id: string;
   name: string;
   description: string;
   required?: boolean;
+  waitlistCheck?: boolean;
+  setWaitlistCheck?: (value: boolean) => void;
 }
 
 export default function TickBox(requirement: Requirement) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (requirement.setWaitlistCheck) {
+      requirement.setWaitlistCheck(e.target.checked);
+    }
+  };
   return (
     <div className="flex gap-3" key={requirement.id}>
       <div className="flex h-6 shrink-0 items-center">
         <div className="group grid size-4 grid-cols-1">
           <input
+            onChange={handleChange}
+            defaultChecked={requirement.waitlistCheck}
             required={requirement.required}
             id={requirement.name}
             name={requirement.name}
@@ -42,17 +50,13 @@ export default function TickBox(requirement: Requirement) {
         </div>
       </div>
       <div className="text-sm/6">
-        <label
-          htmlFor="comments"
-          className="font-medium text-gray-900"
-        >
-          {requirement.required ? <span className="text-red-700">*</span> : null}
+        <label htmlFor="comments" className="font-medium text-gray-900">
+          {requirement.required ? (
+            <span className="text-red-700">*</span>
+          ) : null}
           {requirement.name}
         </label>
-        <p
-          id="comments-description"
-          className="text-gray-500"
-        >
+        <p id="comments-description" className="text-gray-500">
           {requirement.description}
         </p>
       </div>
