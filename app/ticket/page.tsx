@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getTicket, insertData } from "../actions";
 import TicketPage from "../components/referralForm";
+import NoTicketPage from "../components/noTicketPage";
 
 export default function Example() {
   const [ticket, setTicket] = useState<string>("");
@@ -37,15 +38,7 @@ export default function Example() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-slate-200">
       <main className="flex flex-col row-start-2 items-center sm:items-start text-black">
-        {parseInt(ticket) < 0 ? (
-          <h1 className="">
-            No more tickets available very sorry but you have been added to the
-            waitlist and you should also consider the following resources: 1.
-            Branches{" "}
-          </h1>
-        ) : (
-          <TicketPage />
-        )}
+        {parseInt(ticket) < 5 ? <NoTicketPage /> : <TicketPage />}
       </main>
     </div>
   );
