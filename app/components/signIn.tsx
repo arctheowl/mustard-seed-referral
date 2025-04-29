@@ -5,6 +5,7 @@ import PostalCodeValidator from "./postcode";
 import { useRouter } from "next/navigation";
 import TickBox from "./tickBox";
 import { insertWaitlist } from "../actions";
+import DatePickerInput from "./datePicker";
 
 export default function SignInPage() {
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function SignInPage() {
     if (waitlistCheck) {
       const waitlistInfo = {
         email: email,
-        childDOB: childDOB.toString(),
+        childDOB: childDOB,
         postalCode: postalCode,
         parentName: parentName.trim(),
         emailConsent: emailConsent,
@@ -36,6 +37,7 @@ export default function SignInPage() {
     // Redirect to the ticket page
     router.push("/ticket");
   };
+
   const [isValidPostCode, setIsValidPostCode] = useState<boolean | null>(false);
   const router = useRouter();
 
@@ -45,6 +47,19 @@ export default function SignInPage() {
   const [postalCode, setPostalCode] = useState<string>("");
   const [childDOB, setChildDOB] = useState<string>("");
   const [waitlistCheck, setWaitlistCheck] = useState<boolean>(false);
+  const [dateValue, dateChange] = useState<Date | null>(new Date("2015-08-31"));
+
+  const onDateChange = (date: Date | null) => {
+    if (date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day}`;
+
+      setChildDOB(formattedDate);
+      dateChange(date);
+    }
+  };
 
   const requirements = [
     {
@@ -129,14 +144,10 @@ export default function SignInPage() {
                   Date of Birth of Child
                 </label>
                 <div className="">
-                  <input
-                    id="dob"
-                    name="dob"
-                    type="date"
-                    required
-                    autoComplete="dob"
-                    onChange={(e) => setChildDOB(e.target.value)}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  <DatePickerInput
+                    dateValue={dateValue}
+                    //@ts-ignore
+                    dateChange={onDateChange}
                   />
                 </div>
               </div>

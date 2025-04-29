@@ -5,6 +5,7 @@ import { insertWaitlist } from "../actions";
 import { useState } from "react";
 import PostalCodeValidator from "./postcode";
 import TickBox from "./tickBox";
+import DatePickerInput from "./datePicker";
 
 const requirements = [
   {
@@ -30,6 +31,7 @@ export default function NoTicketPage() {
   const [postalCode, setPostalCode] = useState<string>("");
   const [childDOB, setChildDOB] = useState<string>("");
   const [isValidPostCode, setIsValidPostCode] = useState<boolean | null>(false);
+  const [dateValue, dateChange] = useState<Date | null>(new Date("2015-08-31"));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,6 +51,18 @@ export default function NoTicketPage() {
           console.log(err);
         })
     );
+  };
+
+  const onDateChange = (date: Date | null) => {
+    if (date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day}`;
+
+      setChildDOB(formattedDate);
+      dateChange(date);
+    }
   };
 
   return (
@@ -111,14 +125,10 @@ export default function NoTicketPage() {
                 Date of Birth of Child
               </label>
               <div className="">
-                <input
-                  id="dob"
-                  name="dob"
-                  type="date"
-                  required
-                  autoComplete="dob"
-                  onChange={(e) => setChildDOB(e.target.value)}
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                <DatePickerInput
+                  dateValue={dateValue}
+                  //@ts-ignore
+                  dateChange={onDateChange}
                 />
               </div>
             </div>
@@ -139,7 +149,7 @@ export default function NoTicketPage() {
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
                 type="submit"
               >
-                Submit
+                Progress
               </button>
             </div>
           </form>
