@@ -14,6 +14,7 @@
     "@heroicons/react": "^2.2.0",
     "@leenguyen/react-flip-clock-countdown": "^1.6.0",
     "@neondatabase/serverless": "^0.10.4",
+    "@vercel/analytics": "^1.5.0",
     "date-fns": "^4.1.0",
     "jb-date-input": "^5.7.0",
     "next": "^15.3.1",
