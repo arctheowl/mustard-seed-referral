@@ -67,6 +67,7 @@ export const ChildInfo = ({
             onChange={(e) => setSchoolYear(e.target.value)}
           >
             <option value="" disabled selected>Select your option</option>
+            <option>Year R</option>
             <option>Year 1</option>
             <option>Year 2</option>
             <option>Year 3</option>
