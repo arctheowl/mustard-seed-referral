@@ -2,10 +2,10 @@ import { useState, ChangeEvent } from "react";
 import AddDynamicInputFields from "../addInputFields";
 
 const ParentNames = ({}) => {
-  const [inputs, setInputs] = useState([{ firstName: "", lastName: "" }]);
+  const [inputs, setInputs] = useState([{ firstName: "", parent_email: "" }]);
 
   const handleAddInput = () => {
-    setInputs([...inputs, { firstName: "", lastName: "" }]);
+    setInputs([...inputs, { firstName: "", parent_email: "" }]);
   };
 
   const handleChange = (
@@ -49,11 +49,11 @@ const ParentNames = ({}) => {
               Parent/Guardian Email
             </label>
             <input
-              aria-label="age"
+              aria-label="Parent/Guardian Email"
               className="rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo"
-              name="age"
-              type="text"
-              value={item.lastName}
+              name="parent_email"
+              type="email"
+              value={item.parent_email}
               onChange={(event) => handleChange(event, index)}
             />
           </div>

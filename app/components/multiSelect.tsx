@@ -1,19 +1,18 @@
 import Select from "react-select";
 
-const options = [
-  { value: "Paediatrician", label: "Paediatrician" },
-  { value: "School", label: "School" },
-  { value: "Health professional", label: "Health professional" },
-  { value: "Children's Services", label: "Children's Services" },
-  { value: "CAMHS", label: "CAMHS" },
-  {
-    value: "Mustard Seed social media/website",
-    label: "Mustard Seed social media/website",
-  },
-  { value: "Word of mouth", label: "Word of mouth" },
-];
+interface Options {
+  value: string;
+  label: string;
+}
 
-const MultiSelect: React.FC = () => {
+interface IMultiSelect {
+  options: Options[];
+  onChange: (selectedOptions: Options[]) => void;
+  isMulti: boolean;
+  name: string;
+}
+
+const MultiSelect = ({ options, name }: IMultiSelect) => {
   const handleChange = (selectedOptions: any) => {
     console.log("Selected options:", selectedOptions);
   };
@@ -22,7 +21,7 @@ const MultiSelect: React.FC = () => {
     <Select
       onChange={handleChange}
       isMulti
-      name="colors"
+      name={name}
       options={options}
       className="basic-multi-select"
       classNamePrefix="select"

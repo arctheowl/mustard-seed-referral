@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from "react";
 
 export default function AddDynamicInputFields() {
-  const [inputs, setInputs] = useState([{ firstName: "", lastName: "" }]);
+  const [inputs, setInputs] = useState([{ firstName: "", age: "" }]);
 
   const handleAddInput = () => {
-    setInputs([...inputs, { firstName: "", lastName: "" }]);
+    setInputs([...inputs, { firstName: "", age: "" }]);
   };
 
   const handleChange = (
@@ -51,8 +51,8 @@ export default function AddDynamicInputFields() {
               aria-label="age"
               className="rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo"
               name="age"
-              type="text"
-              value={item.lastName}
+              type="number"
+              value={item.age}
               onChange={(event) => handleChange(event, index)}
             />
           </div>

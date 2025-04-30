@@ -19,6 +19,10 @@ export const PersonalInfo = ({
   setPhone,
   setSignposted,
 }: PersonalInfoProps) => {
+  const handleSignpostedChange = (selectedOptions: any) => {
+    const selectedValues = selectedOptions.map((option: any) => option.value);
+    setSignposted(selectedValues.join(", "));
+  };
   return (
     <div className="">
       <Divider title={"Personal Information"} />
@@ -76,7 +80,23 @@ export const PersonalInfo = ({
       />
       <label className="block text-sm font-medium text-gray-700 mt-4">
         Signposted to Mustard Seed via......
-        <MultiSelect />
+        <MultiSelect
+          options={[
+            { value: "Paediatrician", label: "Paediatrician" },
+            { value: "School", label: "School" },
+            { value: "Health professional", label: "Health professional" },
+            { value: "Children's Services", label: "Children's Services" },
+            { value: "CAMHS", label: "CAMHS" },
+            {
+              value: "Mustard Seed social media/website",
+              label: "Mustard Seed social media/website",
+            },
+            { value: "Word of mouth", label: "Word of mouth" },
+          ]}
+          onChange={handleSignpostedChange}
+          isMulti={false}
+          name={""}
+        />
       </label>
     </div>
   );
