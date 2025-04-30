@@ -38,6 +38,7 @@ export const PersonalInfo = ({
       <label className="block text-sm font-medium text-gray-700 mt-4">
         Email Address to Contact You
         <input
+          required
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           name="email"
@@ -47,8 +48,9 @@ export const PersonalInfo = ({
       <label className="block text-sm font-medium text-gray-700 mt-4">
         Secondary Email Address
         <input
+          required
           onChange={(e) => setSecondEmail(e.target.value)}
-          type="SecondEmail"
+          type="email"
           name="SecondEmail"
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />

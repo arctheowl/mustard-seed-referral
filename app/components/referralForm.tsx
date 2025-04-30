@@ -17,6 +17,7 @@ export default function TicketPage() {
   const [userInfo, setUserInfo] = useState<any>({});
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [secondEmail, setSecondEmail] = useState<string>("");
   // const [eligibility, setEligibility] = useState<boolean>(false);
   const [signposted, setSignposted] = useState<string>("");
   const [childName, setChildName] = useState<string>("");
@@ -31,7 +32,6 @@ export default function TicketPage() {
   const [diagnosisDate, setDiagnosisDate] = useState<string>("");
   const [medication, setMedication] = useState<string>("");
   const [professionals, setProfessionals] = useState<string>("");
-  const [secondEmail, setSecondEmail] = useState<string>("");
 
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -98,9 +98,9 @@ export default function TicketPage() {
     console.log(
       insertData(userInfo)
         .then(() => setSuccess(true))
-        .then(() => localStorage.removeItem("mustardSeedReferralTicket"))
-        .then(() => setTicket(""))
-        .then(() => (window.location.href = "/terms"))
+        // .then(() => localStorage.removeItem("mustardSeedReferralTicket"))
+        // .then(() => setTicket(""))
+        // .then(() => (window.location.href = "/terms"))
         .catch((err) => {
           setError(true);
           console.log(err);

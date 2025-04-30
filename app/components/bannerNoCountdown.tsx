@@ -20,7 +20,7 @@ const BannerNoCountdown = () => {
             </Link>{" "}
             for resources and future events.
           </p>
-          If you would be interested in paid for support you could also visit
+          If you would be interested in self-funded Occupational Therapy support you could also visit
           branches at{" "}
           <Link
             className="text-blue-600 hover:underline"

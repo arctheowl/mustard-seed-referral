@@ -1,4 +1,4 @@
-import Select from "react-select";
+import Select, { ActionMeta, MultiValue } from "react-select";
 
 interface Options {
   value: string;
@@ -7,19 +7,15 @@ interface Options {
 
 interface IMultiSelect {
   options: Options[];
-  onChange: (selectedOptions: Options[]) => void;
+  onChange: (newValue: MultiValue<Options>, actionMeta: ActionMeta<Options>) => void
   isMulti: boolean;
   name: string;
 }
 
-const MultiSelect = ({ options, name }: IMultiSelect) => {
-  const handleChange = (selectedOptions: any) => {
-    console.log("Selected options:", selectedOptions);
-  };
-
+const MultiSelect = ({ options, name, onChange }: IMultiSelect) => {
   return (
     <Select
-      onChange={handleChange}
+      onChange={onChange}
       isMulti
       name={name}
       options={options}

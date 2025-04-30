@@ -25,15 +25,15 @@ export default function Example() {
     } else {
       setTicket(localStorage.getItem("mustardSeedReferralTicket") || "");
     }
-    if (
-      !localStorage.getItem("mustardCountDownComplete") ||
-      localStorage.getItem("mustardCountDownComplete") === ""
-    ) {
-      console.log(
-        "You are not eligible to access this page. Please wait for the countdown to finish."
-      );
-      router.push("/");
-    }
+    // if (
+    //   !localStorage.getItem("mustardCountDownComplete") ||
+    //   localStorage.getItem("mustardCountDownComplete") === ""
+    // ) {
+    //   console.log(
+    //     "You are not eligible to access this page. Please wait for the countdown to finish."
+    //   );
+    //   router.push("/");
+    // }
   }, []);
 
   return (
