@@ -163,7 +163,7 @@ export default function TicketPage() {
         <Error
           show={false}
           setShow={setShow}
-          message={"Your form has not been submitted correctly."}
+          message={"Your form has not been submitted correctly. Please refresh the page and try again."}
         />
       )}
       <main className="md:flex md:flex-col md:items-center sm:items-start text-black">

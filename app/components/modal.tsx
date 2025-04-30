@@ -18,6 +18,9 @@ export default function Modal({ modalOpen, setModalOpen, userInfo }: IModal) {
   const handleClose = (value: any) => {
     setModalOpen(false);
   };
+
+  console.log("userInfo", userInfo);
+  console.log("userInfo.siblings", userInfo.siblings);
   return (
     <Dialog
       open={modalOpen}
@@ -44,27 +47,66 @@ export default function Modal({ modalOpen, setModalOpen, userInfo }: IModal) {
                   Referral Information
                 </DialogTitle>
                 <div className="mt-2 flex-col text-black items-center">
-                  <p>Name: {userInfo.name}</p>
-                  <p>Second Email: {userInfo.second_email}</p>
-                  <p>Signposted: {userInfo.signposted}</p>
-                  <p>Child Name: {userInfo.child_name}</p>
-                  <p>Child DOB: {userInfo.child_DOB}</p>
-                  <p>Parent Name: {userInfo.parent_name}</p>
-                  <p>Sibling Names: {userInfo.sibling_names}</p>
-                  <p>Sibling Ages: {userInfo.sibling_ages}</p>
-                  <p>Address: {userInfo.address}</p>
-                  <p>Phone: {userInfo.phone}</p>
-                  <p>School Name: {userInfo.school_name}</p>
-                  <p>School Year: {userInfo.school_year}</p>
-                  <p>Diagnosis: {userInfo.diagnosis}</p>
-                  <p>Diagnosis Date: {userInfo.diagnosis_date}</p>
-                  <p>Medication: {userInfo.medication}</p>
-                  <p>Professionals: {userInfo.professionals}</p>
-                  <p>Email: {userInfo.email}</p>
-                  <p>
-                    Eligibility:
-                    {userInfo.eligibility ? "Eligible" : "Not Eligible"}
-                  </p>
+
+                  {userInfo ? (
+                    <div>
+                      <p>
+                        {userInfo.name}
+                      </p>
+                      <p>{userInfo.email}</p>
+                      <p>{userInfo.second_email}</p>
+                      <p>Signposted by: {userInfo.signposted}</p>,
+                      Child Name: {userInfo?.child_name}
+                      {/* <p>Child DOB: {userInfo?.child_dob}</p> */}
+                      <h2>Parent/Guardian Names</h2>
+                      {userInfo?.parent_names ? (
+                        <p>
+                          {userInfo.parent_names.map((parent: any) => (
+                            <span key={parent.id}>
+                              {parent.firstName} ({parent.parent_email})
+                            </span>
+                          ))}
+                        </p>
+                      ) : (
+                        <p>No parent/guardian names</p>
+                      )}
+                      <h2>Siblings:</h2>
+                      {userInfo?.siblings ? (
+                        <p>
+                          {userInfo.siblings.map((sibling: any) => (
+                            <span key={sibling.id}>
+                              {sibling.firstName} ({sibling.age})
+                            </span>
+                          ))}
+                        </p>
+                      ) : (
+                        <p>No siblings</p>
+                      )}
+                      <p></p>{userInfo.address}
+                      <p></p>{userInfo.phone}
+                      <p></p>{userInfo.school_name}
+                      <p></p>{userInfo.school_year}
+                      <p></p>{userInfo.diagnosis}
+                      {/* <p></p>{userInfo.diagnosis_date} */}
+                      <p></p>{userInfo.medication}
+                      <p></p>{userInfo.professionals}
+                      <p></p>{userInfo.eligibility}
+                      <p></p>{userInfo.interests}
+                      <p></p>{userInfo.interests_blob}
+                      <p></p>{userInfo.communicate_with_others}
+                      <p></p>{userInfo.follow_instructions}
+                      <p></p>{userInfo.visual_support}
+                      <p></p>{userInfo.social_communication}
+                      <p></p>{userInfo.highly_anxious}
+                      <p></p>{userInfo.recognise_emotions}
+                      <p></p>{userInfo.attend_school}
+                      <p></p>{userInfo.self_harm}
+                      <p></p>{userInfo.areas_of_difficulty}
+                      <p></p>{userInfo.daily_skills}
+                      <p></p>{userInfo.additional_support}
+                      <p>{userInfo.consent}</p>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
