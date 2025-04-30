@@ -10,15 +10,13 @@ export default function CheckBox({ label, description }: CheckBoxProps) {
         <label htmlFor="comments" className="font-medium text-gray-900">
           {label}
         </label>
-        <p id="comments-description" className="text-gray-500">
-          <p className="mt-4">
-            The majority of our groups and interventions take place in school
-            hours, Mondays-Fridays, term time only. If you are not able to bring
-            your child to sessions during these times we will not be able to
-            offer face to face support but will signpost you to other services.
-            Please confirm you would be able to bring your child to sessions at
-            these times.
-          </p>
+        <p id="comments-description" className="text-gray-500 mt-4">
+          The majority of our groups and interventions take place in school
+          hours, Mondays-Fridays, term time only. If you are not able to bring
+          your child to sessions during these times we will not be able to offer
+          face to face support but will signpost you to other services. Please
+          confirm you would be able to bring your child to sessions at these
+          times.
           {description}
         </p>
       </div>
