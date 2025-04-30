@@ -45,6 +45,7 @@ export default function TicketPage() {
   const [dailySkills, setDailySkills] = useState<string>("");
   const [additionalSupport, setAdditionalSupport] = useState<string>("");
   const [socialCommunication, setSociailCommunication] = useState<string>("");
+  const [consent, setConsent] = useState<string>("");
 
 
   const [success, setSuccess] = useState<boolean>(false);
@@ -100,6 +101,7 @@ export default function TicketPage() {
       areasOfDifficulty: areasOfDifficulty,
       dailySkills: dailySkills,
       additionalSupport: additionalSupport,
+      consent: consent,
     });
   }, [
     name,
@@ -131,6 +133,7 @@ export default function TicketPage() {
     areasOfDifficulty,
     dailySkills,
     additionalSupport,
+    consent,
   ]);
 
   const handleSubmit = (userInfo: any) => {
@@ -163,74 +166,66 @@ export default function TicketPage() {
           message={"Your form has not been submitted correctly."}
         />
       )}
-      <main className="flex flex-col items-center sm:items-start text-black">
-        {parseInt(ticket) < 0 ? (
-          <h1 className="">
-            No more tickets available very sorry but you have been added to the
-            waitlist and you should also consider the following resources: 1.
-            Branches{" "}
-          </h1>
-        ) : (
-          <div>
-            <ProgressBar step={1} />
-            <form className="mb-4 w-1/2 mx-auto">
-              <div className="flex flex-col items-center justify-center w-full h-full">
-                <h1 className="text-6xl pt-10">Referral Form</h1>
-                <FormCountDown />
-              </div>
+      <main className="md:flex md:flex-col md:items-center sm:items-start text-black">
+        <div>
+          <ProgressBar step={1} />
+          <form className="md:mb-4 md:w-1/2 md:mx-auto">
+            <div className="md:flex md:flex-col md:items-center md:justify-center md:w-full md:h-full">
+              <h1 className="text-6xl pt-10">Referral Form</h1>
+              <FormCountDown />
+            </div>
 
-              <PersonalInfo
-                setName={setName}
-                setEmail={setEmail}
-                setSecondEmail={setSecondEmail}
-                setAddress={setAddress}
-                setPhone={setPhone}
-                setSignposted={setSignposted}
-              />
-              <ChildInfo
-                setChildName={setChildName}
-                setChildDOB={setChildDOB}
-                setSchoolName={setSchoolName}
-                setSchoolYear={setSchoolYear}
-              />
-              <FamilyInfo
-                setParentNames={setParentNames}
-                setSiblings={setSiblings}
-              />
-              <DiagnosisInfo
-                setMedication={setMedication}
-                setDiagnosis={setDiagnosis}
-                setDiagnosisDate={setDiagnosisDate}
-                setProfessionals={setProfessionals}
-              />
-              <ChildsInterests
-                setInterests={setInterests}
-                setInterestsBlob={setInterestsBlob}
-                setCommunicateWithOthers={setCommunicateWithOthers}
-                setFollowInstructions={setFollowInstructions}
-                setVisualSupport={setVisualSupport}
-                setHighlyAnxious={setHighlyAnxious}
-                setRecogniseEmotions={setRecogniseEmotions}
-                setAttendSchool={setAttendSchool}
-                setSelfHarm={setSelfHarm}
-                setAreasOfDifficulty={setAreasOfDifficulty}
-                setDailySkills={setDailySkills}
-                setAdditionalSupport={setAdditionalSupport}
-                setSociailCommunication={setSociailCommunication}
-              />
-              <ConsentInfo />
-              <button
-                type="button"
-                onClick={() => {
-                  handleSubmit(userInfo);
-                }}
-                className="mt-6 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        )}
+            <PersonalInfo
+              setName={setName}
+              setEmail={setEmail}
+              setSecondEmail={setSecondEmail}
+              setAddress={setAddress}
+              setPhone={setPhone}
+              setSignposted={setSignposted}
+            />
+            <ChildInfo
+              setChildName={setChildName}
+              setChildDOB={setChildDOB}
+              setSchoolName={setSchoolName}
+              setSchoolYear={setSchoolYear}
+            />
+            <FamilyInfo
+              setParentNames={setParentNames}
+              setSiblings={setSiblings}
+            />
+            <DiagnosisInfo
+              setMedication={setMedication}
+              setDiagnosis={setDiagnosis}
+              setDiagnosisDate={setDiagnosisDate}
+              setProfessionals={setProfessionals}
+            />
+            <ChildsInterests
+              setInterests={setInterests}
+              setInterestsBlob={setInterestsBlob}
+              setCommunicateWithOthers={setCommunicateWithOthers}
+              setFollowInstructions={setFollowInstructions}
+              setVisualSupport={setVisualSupport}
+              setHighlyAnxious={setHighlyAnxious}
+              setRecogniseEmotions={setRecogniseEmotions}
+              setAttendSchool={setAttendSchool}
+              setSelfHarm={setSelfHarm}
+              setAreasOfDifficulty={setAreasOfDifficulty}
+              setDailySkills={setDailySkills}
+              setAdditionalSupport={setAdditionalSupport}
+              setSociailCommunication={setSociailCommunication}
+            />
+            <ConsentInfo setConsent={setConsent} />
+            <button
+              type="button"
+              onClick={() => {
+                handleSubmit(userInfo);
+              }}
+              className="mt-6 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </main>
     </div>
   );

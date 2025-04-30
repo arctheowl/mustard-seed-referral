@@ -88,8 +88,8 @@ export default function SignInPage() {
   ];
 
   return (
-    <div className="grid grid-cols-2 bg-white rounded py-10">
-      <div className="relative hidden lg:block lg:flex-1">
+    <div className="md:grid md:grid-cols-2 bg-white md:rounded md:py-10">
+      <div className="relative block flex-1">
         <Image src="/MustardSeed_Primary-Logo.png" alt="hero" layout="fill" />
       </div>
 

@@ -32,12 +32,12 @@ const ParentNames = ({setParentNames}: ParentsProps) => {
     <div className="container">
       {inputs.map((item, index) => (
         <div
-          className="input_container grid-cols-12 grid gap-5 items-center content-center"
+          className="input_container md:grid-cols-12 md:grid gap-1 md:gap-5 md:items-center md:content-center block "
           key={index}
         >
           <h2 className="col-span-1 text-center">{index + 1}</h2>
-          <div className="col-span-4 ">
-            <label className=" block text-sm font-medium text-gray-700">
+          <div className="md:col-span-4">
+            <label className="text-sm font-medium text-gray-700">
               Parent/Guardian Name
             </label>
             <input

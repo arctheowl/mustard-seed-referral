@@ -8,7 +8,7 @@ export default function FormCountDown({ children }: any) {
   const [data, setData] = useState<string>("2025-04-30 22:15:00");
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
+    <div className="md:flex md:flex-col md:items-center md:justify-center md:w-full md:h-full hidden">
       <FlipClockCountdown
         to={data}
         className="text-black text-sm"

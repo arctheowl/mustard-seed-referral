@@ -24,9 +24,9 @@ export const PersonalInfo = ({
     setSignposted(selectedValues.join(", "));
   };
   return (
-    <div className="">
+    <div className=" md:w-full mt-8">
       <Divider title={"Personal Information"} />
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="md:block text-sm font-medium text-gray-700">
         Full Name
         <input
           onChange={(e) => setName(e.target.value)}

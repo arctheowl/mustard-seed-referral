@@ -33,7 +33,7 @@ export default function AddDynamicInputFields({ setSiblings }: AddDynamicInputFi
     <div className="container">
       {inputs.map((item, index) => (
         <div
-          className="input_container grid-cols-12 grid gap-5 items-center"
+          className="input_container md:grid-cols-12 md:grid md:gap-5 md:items-center block"
           key={index}
         >
           <h2 className="col-span-1 text-center">{index + 1}</h2>
