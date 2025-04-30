@@ -8,7 +8,7 @@ import { PersonalInfo } from "./referralForm/PersonalInfo";
 import { ChildInfo } from "./referralForm/ChildsInfo";
 import { FamilyInfo } from "./referralForm/FamilyInfo";
 import { DiagnosisInfo } from "./referralForm/Diagnosis";
-import { Section2 } from "./referralForm/Section2";
+import { ChildsInterests } from "./referralForm/ChildsInterests";
 import { ConsentInfo } from "./referralForm/Consent";
 
 export default function TicketPage() {
@@ -162,7 +162,7 @@ export default function TicketPage() {
                 setDiagnosisDate={setDiagnosisDate}
                 setProfessionals={setProfessionals}
               />
-              <Section2 />
+              <ChildsInterests />
               <ConsentInfo />
               <button
                 type="button"

@@ -1,14 +1,12 @@
 import Divider from "./divider";
 
-interface ManagingEmotionsProps {
+interface ManagingEmotionsProps {}
 
-}
-
-export const ManagingEmotions = ({ }: ManagingEmotionsProps) => {
+export const ManagingEmotions = ({}: ManagingEmotionsProps) => {
   return (
     <div className="">
       <Divider title={"Managing Emotions"} />
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-5 items-center align-middle">
         <label className="block text-sm font-medium text-gray-700">
           Is Your Child Highly Anxious?
           <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -26,7 +24,7 @@ export const ManagingEmotions = ({ }: ManagingEmotionsProps) => {
           </select>
         </label>
         <label className="block text-sm font-medium text-gray-700">
-        Does your child struggle to attend school?
+          Does your child struggle to attend school?
           <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <option>Yes</option>
             <option>No </option>
@@ -36,7 +34,7 @@ export const ManagingEmotions = ({ }: ManagingEmotionsProps) => {
           </select>
         </label>
         <label className="block text-sm font-medium text-gray-700">
-        Does your child...
+          Does your child...
           <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <option>Self harm</option>
             <option>Present violent behaviour towards others </option>
@@ -44,9 +42,7 @@ export const ManagingEmotions = ({ }: ManagingEmotionsProps) => {
             <option>None of the above</option>
           </select>
         </label>
-
       </div>
     </div>
-
-  )
-}
+  );
+};
