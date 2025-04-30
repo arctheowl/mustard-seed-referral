@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { getTicket, insertData } from "../actions";
 import TicketPage from "../components/referralForm";
 import NoTicketPage from "../components/noTicketPage";
+import { useRouter } from "next/navigation";
 
 export default function Example() {
   const [ticket, setTicket] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
     if (
@@ -25,15 +25,16 @@ export default function Example() {
     } else {
       setTicket(localStorage.getItem("mustardSeedReferralTicket") || "");
     }
+    if (
+      !localStorage.getItem("mustardCountDownComplete") ||
+      localStorage.getItem("mustardCountDownComplete") === ""
+    ) {
+      console.log(
+        "You are not eligible to access this page. Please wait for the countdown to finish."
+      );
+      router.push("/");
+    }
   }, []);
-
-  const handleSubmit = (name: string, email: string) => {
-    const userInfo = {
-      name: name,
-      email: email,
-    };
-    insertData(userInfo);
-  };
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-slate-200">
