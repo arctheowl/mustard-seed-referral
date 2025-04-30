@@ -24,7 +24,6 @@ export const ConsentInfo = ({ setConsent }: ConsentInfoProps) => {
   const handleConsentChange = (index: number) => {
     const newConsent = [...consentOptions];
     newConsent[index].value = newConsent[index].value === true ? false : true;
-    console.log(newConsent);
     setConsent(JSON.stringify(newConsent));
   };
 
@@ -61,103 +60,7 @@ export const ConsentInfo = ({ setConsent }: ConsentInfoProps) => {
           "/>
             </div>
           ))}
-          {/* <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              Therapy intervention and evaluation
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              Reports for funders and annual report
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3  py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              In our termly newsletter for supporters
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              On Mustard Seed's social media
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div> */}
-          {/* <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              On Mustard Seed's website
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              In our leaflet or other promotional material
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border-b-2 border-gray-300 focus:outline-none  sm:text-sm">
-            <p className="">
-              None of the above
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div> */}
         </div>
-
-        <label className="text-lg font-medium text-gray-700 mt-4">
-          <p className="">
-            We would like your consent for the following:
-          </p>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
-            <p className="">
-              Consent to retain your information
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 md:grid md:grid-cols-2 md:w-full block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
-            <p className="">
-              Consent to share your information
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-          <div className="mt-1 grid grid-cols-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm">
-            <p className="">
-              I do not give consent
-            </p>
-            <input
-              type="checkbox"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
-          "/>
-          </div>
-        </label>
       </div>
     </div>
 
