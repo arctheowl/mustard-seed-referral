@@ -158,6 +158,7 @@ export default function TicketPage() {
               <DiagnosisInfo
                 setMedication={setMedication}
                 setDiagnosis={setDiagnosis}
+                // diagnosisDate={diagnosisDate}
                 setDiagnosisDate={setDiagnosisDate}
                 setProfessionals={setProfessionals}
               />
