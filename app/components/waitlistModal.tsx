@@ -22,7 +22,6 @@ export default function WaitlistModal({
   const handleClose = (value: any) => {
     setModalOpen(false);
   };
-  console.log(userInfo);
   return (
     <Dialog
       open={modalOpen}

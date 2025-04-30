@@ -139,7 +139,6 @@ export default function DashboardLayout({
     });
     getWaitlist().then((data: any) => {
       setWaitlistData(data);
-      console.log("Waitlist", data);
     });
 
     getReferrals().then((data: any) => {

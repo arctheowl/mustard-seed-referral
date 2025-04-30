@@ -104,8 +104,6 @@ export default function Dashboard() {
     setModalOpen(!modalOpen);
   };
 
-  console.log("Data", data);
-
   return (
     <>
       {modalOpen ? (

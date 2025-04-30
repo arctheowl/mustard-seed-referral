@@ -33,7 +33,11 @@ export const DiagnosisInfo = ({
   const handleDiagnosisChange = (selectedOptions: any) => {
     const selectedValues = selectedOptions.map((option: any) => option.value);
     setDiagnosis(selectedValues.join(", "));
-    console.log(selectedValues.join(", "));
+  };
+
+  const handleProfessionalsChange = (selectedOptions: any) => {
+    const selectedValues = selectedOptions.map((option: any) => option.value);
+    setProfessionals(selectedValues.join(", "));
   };
 
   return (
@@ -95,7 +99,7 @@ export const DiagnosisInfo = ({
             { value: "Other", label: "Other" },
             { value: "None", label: "None" },
           ]}
-          onChange={handleDiagnosisChange}
+          onChange={handleProfessionalsChange}
           isMulti={false}
           name={"Professionals Currently Involved"}
         />

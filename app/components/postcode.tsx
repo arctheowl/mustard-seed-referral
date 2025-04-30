@@ -20,7 +20,6 @@ const PostalCodeValidator = ({
     const code = e.target.value.toUpperCase();
     setPostalCode(code);
     if (selectedCountry) {
-      // console.log(selectedCountry.countryCode)
       setIsValidPostCode(validatePostalCode(selectedCountry, code));
     }
   };

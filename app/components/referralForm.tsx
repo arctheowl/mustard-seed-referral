@@ -94,7 +94,6 @@ export default function TicketPage() {
   ]);
 
   const handleSubmit = (userInfo: any) => {
-    console.log(userInfo);
     console.log(
       insertData(userInfo)
         .then(() => setSuccess(true))
@@ -161,7 +160,6 @@ export default function TicketPage() {
               <DiagnosisInfo
                 setMedication={setMedication}
                 setDiagnosis={setDiagnosis}
-                // diagnosisDate={diagnosisDate}
                 setDiagnosisDate={setDiagnosisDate}
                 setProfessionals={setProfessionals}
               />
