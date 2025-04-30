@@ -1,6 +1,10 @@
 import { useState, ChangeEvent } from "react";
 
-const Strengths = ({}) => {
+interface StrengthsProps {
+  setInterests: (value: string) => void;
+}
+
+const Strengths = ({ setInterests }: StrengthsProps) => {
   const [inputs, setInputs] = useState([{ strengths: "" }]);
 
   const handleAddInput = () => {
@@ -15,12 +19,14 @@ const Strengths = ({}) => {
     let onChangeValue = [...inputs];
     onChangeValue[index][name as keyof (typeof inputs)[0]] = value;
     setInputs(onChangeValue);
+    setInterests(JSON.stringify(onChangeValue));
   };
 
   const handleDeleteInput = (index: number) => {
     const newArray = [...inputs];
     newArray.splice(index, 1);
     setInputs(newArray);
+    setInterests(JSON.stringify(newArray));
   };
 
   return (
@@ -81,8 +87,6 @@ const Strengths = ({}) => {
           </div>
         </div>
       ))}
-
-      {/* <div className="body"> {JSON.stringify(inputs)} </div> */}
     </div>
   );
 };

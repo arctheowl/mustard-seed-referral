@@ -18,7 +18,6 @@ export default function Modal({ modalOpen, setModalOpen, userInfo }: IModal) {
   const handleClose = (value: any) => {
     setModalOpen(false);
   };
-  console.log(userInfo);
   return (
     <Dialog
       open={modalOpen}

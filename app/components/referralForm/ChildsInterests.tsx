@@ -4,22 +4,49 @@ import { ManagingEmotions } from "./ManagingEmtions";
 import { SensorySkills } from "./SensorySkills";
 import Strengths from "./strengths";
 
-interface PersonalInfoProps {}
+interface ChildsInfoProps {
+  setInterests: (value: string) => void;
+  setInterestsBlob: (value: string) => void;
+  setCommunicateWithOthers: (value: string) => void;
+  setFollowInstructions: (value: string) => void;
+  setVisualSupport: (value: string) => void;
+  setHighlyAnxious: (value: string) => void;
+  setRecogniseEmotions: (value: string) => void;
+  setAttendSchool: (value: string) => void;
+  setSelfHarm: (value: string) => void;
+  setAreasOfDifficulty: (value: string) => void;
+  setDailySkills: (value: string) => void;
+  setAdditionalSupport: (value: string) => void;
+  setSociailCommunication: (value: string) => void;
+}
 
-export const ChildsInterests = ({}: PersonalInfoProps) => {
+export const ChildsInterests = ({
+  setInterests,
+  setInterestsBlob,
+  setCommunicateWithOthers,
+  setFollowInstructions,
+  setVisualSupport,
+  setHighlyAnxious,
+  setRecogniseEmotions,
+  setAttendSchool,
+  setSelfHarm,
+  setAreasOfDifficulty,
+  setDailySkills,
+  setAdditionalSupport,
+  setSociailCommunication }: ChildsInfoProps) => {
   return (
     <div className="">
       <Divider title={"Child's Information"} />
       <div className="grid grid-cols-2 gap-5 items-center align-middle">
         <label className="block text-sm font-medium text-gray-700">
           Child's Strengths and Interests
-          <Strengths />
+          <Strengths setInterests={setInterests} />
         </label>
 
         <label className="block text-sm font-medium text-gray-700 mt-4 col-span-2">
           Description of Child's Strengths and Interests (Optional)
           <textarea
-            onChange={(e) => e.target.value}
+            onChange={(e) => setInterestsBlob(e.target.value)}
             name="childName"
             className="mt-1 block w-full h-28 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -28,8 +55,9 @@ export const ChildsInterests = ({}: PersonalInfoProps) => {
           How does the child communicate with others?
           <select
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            onChange={(e) => e.target.value}
+            onChange={(e) => setCommunicateWithOthers(e.target.value)}
           >
+            <option value="" disabled selected>Select your option</option>
             <option>
               Non-verbal (very limited or no verbal communication)
             </option>
@@ -45,8 +73,9 @@ export const ChildsInterests = ({}: PersonalInfoProps) => {
           Can your child follow short verbal instructions?
           <select
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            onChange={(e) => e.target.value}
+            onChange={(e) => setFollowInstructions(e.target.value)}
           >
+            <option value="" disabled selected>Select your option</option>
             <option>Yes</option>
             <option>No</option>
             <option>Yes with Visual Supoprt</option>
@@ -57,8 +86,9 @@ export const ChildsInterests = ({}: PersonalInfoProps) => {
           stories, routine charts, etc.)?
           <select
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            onChange={(e) => e.target.value}
+            onChange={(e) => setVisualSupport(e.target.value)}
           >
+            <option value="" disabled selected>Select your option</option>
             <option>Yes - at home</option>
             <option>Yes - at school</option>
             <option>Yes - at home and school</option>
@@ -74,17 +104,21 @@ export const ChildsInterests = ({}: PersonalInfoProps) => {
           />
         </label>
         <label className="block text-sm font-medium text-gray-700 mt-4 col-span-2">
-          Social Communication (Optional)
+          Social Communication Description
           <textarea
-            onChange={(e) => e.target.value}
+            onChange={(e) => setSociailCommunication(e.target.value)}
             name="childName"
             className="mt-1 block w-full h-28 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </label>
       </div>
-      <ManagingEmotions />
-      <SensorySkills />
-      <AdditionalInfo />
+      <ManagingEmotions
+        setHighlyAnxious={setHighlyAnxious}
+        setRecogniseEmotions={setRecogniseEmotions}
+        setAttendSchool={setAttendSchool}
+        setSelfHarm={setSelfHarm} />
+      <SensorySkills setAreasOfDifficulty={setAreasOfDifficulty} setDailySkills={setDailySkills} />
+      <AdditionalInfo setAdditionalSupport={setAdditionalSupport} />
     </div>
   );
 };

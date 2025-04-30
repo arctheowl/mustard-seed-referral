@@ -32,6 +32,20 @@ export default function TicketPage() {
   const [diagnosisDate, setDiagnosisDate] = useState<string>("");
   const [medication, setMedication] = useState<string>("");
   const [professionals, setProfessionals] = useState<string>("");
+  const [interests, setInterests] = useState<string>("");
+  const [interestsblob, setInterestsBlob] = useState<string>("");
+  const [communicateWithOthers, setCommunicateWithOthers] = useState<string>("");
+  const [followInstructions, setFollowInstructions] = useState<string>("");
+  const [visualSupport, setVisualSupport] = useState<string>("");
+  const [highlyAnxious, setHighlyAnxious] = useState<string>("");
+  const [recogniseEmotions, setRecogniseEmotions] = useState<string>("");
+  const [attendSchool, setAttendSchool] = useState<string>("");
+  const [selfHarm, setSelfHarm] = useState<string>("");
+  const [areasOfDifficulty, setAreasOfDifficulty] = useState<string>("");
+  const [dailySkills, setDailySkills] = useState<string>("");
+  const [additionalSupport, setAdditionalSupport] = useState<string>("");
+  const [socialCommunication, setSociailCommunication] = useState<string>("");
+
 
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -73,6 +87,19 @@ export default function TicketPage() {
       medication: medication,
       professionals: professionals,
       eligibility: true,
+      interests: interests,
+      interestsblob: interestsblob,
+      communicateWithOthers: communicateWithOthers,
+      followInstructions: followInstructions,
+      visualSupport: visualSupport,
+      socialCommunication: socialCommunication,
+      highlyAnxious: highlyAnxious,
+      recogniseEmotions: recogniseEmotions,
+      attendSchool: attendSchool,
+      selfHarm: selfHarm,
+      areasOfDifficulty: areasOfDifficulty,
+      dailySkills: dailySkills,
+      additionalSupport: additionalSupport,
     });
   }, [
     name,
@@ -91,6 +118,19 @@ export default function TicketPage() {
     diagnosisDate,
     medication,
     professionals,
+    interests,
+    interestsblob,
+    communicateWithOthers,
+    followInstructions,
+    visualSupport,
+    socialCommunication,
+    highlyAnxious,
+    recogniseEmotions,
+    attendSchool,
+    selfHarm,
+    areasOfDifficulty,
+    dailySkills,
+    additionalSupport,
   ]);
 
   const handleSubmit = (userInfo: any) => {
@@ -163,7 +203,21 @@ export default function TicketPage() {
                 setDiagnosisDate={setDiagnosisDate}
                 setProfessionals={setProfessionals}
               />
-              <ChildsInterests />
+              <ChildsInterests
+                setInterests={setInterests}
+                setInterestsBlob={setInterestsBlob}
+                setCommunicateWithOthers={setCommunicateWithOthers}
+                setFollowInstructions={setFollowInstructions}
+                setVisualSupport={setVisualSupport}
+                setHighlyAnxious={setHighlyAnxious}
+                setRecogniseEmotions={setRecogniseEmotions}
+                setAttendSchool={setAttendSchool}
+                setSelfHarm={setSelfHarm}
+                setAreasOfDifficulty={setAreasOfDifficulty}
+                setDailySkills={setDailySkills}
+                setAdditionalSupport={setAdditionalSupport}
+                setSociailCommunication={setSociailCommunication}
+              />
               <ConsentInfo />
               <button
                 type="button"
