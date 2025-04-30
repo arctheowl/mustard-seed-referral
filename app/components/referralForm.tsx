@@ -92,8 +92,6 @@ export default function TicketPage() {
     professionals,
   ]);
 
-  const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
-
   const handleSubmit = (userInfo: any) => {
     console.log(userInfo);
     console.log(
