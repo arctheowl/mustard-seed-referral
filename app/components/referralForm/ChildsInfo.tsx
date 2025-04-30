@@ -5,8 +5,6 @@ import Divider from "./divider";
 interface PersonalInfoProps {
   setChildName: (name: string) => void;
   setChildDOB: (dob: string) => void;
-  setParentName: (name: string) => void;
-  setSiblings: (siblings: string) => void;
   setSchoolName: (schoolName: string) => void;
   setSchoolYear: (schoolYear: string) => void;
 }
@@ -14,8 +12,6 @@ interface PersonalInfoProps {
 export const ChildInfo = ({
   setChildName,
   setChildDOB,
-  setParentName,
-  setSiblings,
   setSchoolName,
   setSchoolYear,
 }: PersonalInfoProps) => {

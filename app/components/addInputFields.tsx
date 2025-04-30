@@ -1,6 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-export default function AddDynamicInputFields() {
+interface AddDynamicInputFieldsProps {
+  setSiblings: Dispatch<SetStateAction<string>>;
+}
+
+export default function AddDynamicInputFields({ setSiblings }: AddDynamicInputFieldsProps) {
   const [inputs, setInputs] = useState([{ firstName: "", age: "" }]);
 
   const handleAddInput = () => {
@@ -15,12 +19,14 @@ export default function AddDynamicInputFields() {
     let onChangeValue = [...inputs];
     onChangeValue[index][name as keyof (typeof inputs)[0]] = value;
     setInputs(onChangeValue);
+    setSiblings(JSON.stringify(onChangeValue));
   };
 
   const handleDeleteInput = (index: number) => {
     const newArray = [...inputs];
     newArray.splice(index, 1);
     setInputs(newArray);
+    setSiblings(JSON.stringify(newArray));
   };
 
   return (

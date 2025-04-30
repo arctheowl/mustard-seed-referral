@@ -26,8 +26,8 @@ export async function insertData(userInfo: any) {
   }
   const sql = neon(process.env.DATABASE_URL);
   const data =
-    await sql`INSERT INTO Referral_Information(name, email, second_email, signposted, child_name, child_DOB, parent_name, sibling_names, sibling_ages, address, phone, school_name, school_year, diagnosis, diagnosis_date, medication, professionals, eligibility)
-VALUES (${userInfo.name}, ${userInfo.email}, ${userInfo.secondEmail}, ${userInfo.signposted}, ${userInfo.childName}, ${userInfo.childDOB}, ${userInfo.parentName}, ${userInfo.sibling_names}, ${userInfo.sibling_ages}, ${userInfo.address}, ${userInfo.phone}, ${userInfo.schoolName}, ${userInfo.schoolYear}, ${userInfo.diagnosis}, ${userInfo.diagnosisDate}, ${userInfo.medication}, ${userInfo.professionals}, ${userInfo.eligibility})
+    await sql`INSERT INTO Referral_Information(name, email, second_email, signposted, child_name, child_DOB, parent_name, siblings, address, phone, school_name, school_year, diagnosis, diagnosis_date, medication, professionals, eligibility)
+VALUES (${userInfo.name}, ${userInfo.email}, ${userInfo.secondEmail}, ${userInfo.signposted}, ${userInfo.childName}, ${userInfo.childDOB}, ${userInfo.parentName}, ${userInfo.siblings}, ${userInfo.address}, ${userInfo.phone}, ${userInfo.schoolName}, ${userInfo.schoolYear}, ${userInfo.diagnosis}, ${userInfo.diagnosisDate}, ${userInfo.medication}, ${userInfo.professionals}, ${userInfo.eligibility})
 RETURNING *;`;
   console.log(data);
   return data;

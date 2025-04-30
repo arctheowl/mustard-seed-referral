@@ -1,16 +1,13 @@
+import { SetStateAction, JSX, Dispatch } from "react";
 import AddDynamicInputFields from "../addInputFields";
-
 interface PersonalInfoProps {
-  setParentName: (name: string) => void;
-  setSiblings: (siblings: string) => void;
+  setSiblings: Dispatch<SetStateAction<string>>
 }
 
-const siblings = [{ name: "Sibling 1", age: "Age" }];
-
-export const SiblingInfo = ({}: PersonalInfoProps) => {
+export const SiblingInfo = ({setSiblings}: PersonalInfoProps) => {
   return (
     <div className="mt-10">
-      <AddDynamicInputFields />
+      <AddDynamicInputFields setSiblings={setSiblings} />
     </div>
   );
 };

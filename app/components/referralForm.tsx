@@ -12,13 +12,13 @@ import { ChildsInterests } from "./referralForm/ChildsInterests";
 import { ConsentInfo } from "./referralForm/Consent";
 import FormCountDown from "./formCountdown";
 
+
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
   const [userInfo, setUserInfo] = useState<any>({});
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [secondEmail, setSecondEmail] = useState<string>("");
-  // const [eligibility, setEligibility] = useState<boolean>(false);
   const [signposted, setSignposted] = useState<string>("");
   const [childName, setChildName] = useState<string>("");
   const [childDOB, setChildDOB] = useState<string>("");
@@ -151,8 +151,6 @@ export default function TicketPage() {
               <ChildInfo
                 setChildName={setChildName}
                 setChildDOB={setChildDOB}
-                setParentName={setParentName}
-                setSiblings={setSiblings}
                 setSchoolName={setSchoolName}
                 setSchoolYear={setSchoolYear}
               />

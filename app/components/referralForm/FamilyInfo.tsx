@@ -1,10 +1,12 @@
+import { Dispatch, SetStateAction } from "react";
 import Divider from "./divider";
 import ParentNames from "./parentNames";
 import { SiblingInfo } from "./Siblings";
 
+
 interface PersonalInfoProps {
   setParentName: (name: string) => void;
-  setSiblings: (siblings: string) => void;
+  setSiblings: Dispatch<SetStateAction<string>>
 }
 
 const siblings = [{ name: "Sibling 1", age: "Age" }];
@@ -17,7 +19,7 @@ export const FamilyInfo = ({
     <div className="">
       <Divider title={"Family Information"} />
       <ParentNames />
-      <SiblingInfo setParentName={setParentName} setSiblings={setSiblings} />
+      <SiblingInfo setSiblings={setSiblings} />
     </div>
   );
 };
