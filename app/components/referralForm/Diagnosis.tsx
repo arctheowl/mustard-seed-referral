@@ -33,6 +33,7 @@ export const DiagnosisInfo = ({
   const handleDiagnosisChange = (selectedOptions: any) => {
     const selectedValues = selectedOptions.map((option: any) => option.value);
     setDiagnosis(selectedValues.join(", "));
+    console.log(selectedValues.join(", "));
   };
 
   return (
