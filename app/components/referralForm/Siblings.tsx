@@ -1,10 +1,10 @@
 import { SetStateAction, JSX, Dispatch } from "react";
 import AddDynamicInputFields from "../addInputFields";
-interface PersonalInfoProps {
+interface SiblingProps {
   setSiblings: Dispatch<SetStateAction<string>>
 }
 
-export const SiblingInfo = ({setSiblings}: PersonalInfoProps) => {
+export const SiblingInfo = ({setSiblings}: SiblingProps) => {
   return (
     <div className="mt-10">
       <AddDynamicInputFields setSiblings={setSiblings} />

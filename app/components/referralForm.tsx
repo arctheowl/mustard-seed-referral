@@ -22,7 +22,7 @@ export default function TicketPage() {
   const [signposted, setSignposted] = useState<string>("");
   const [childName, setChildName] = useState<string>("");
   const [childDOB, setChildDOB] = useState<string>("");
-  const [parentName, setParentName] = useState<string>("");
+  const [parentNames, setParentNames] = useState<string>("");
   const [siblings, setSiblings] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -62,7 +62,7 @@ export default function TicketPage() {
       signposted: signposted,
       childName: childName,
       childDOB: childDOB,
-      parentName: parentName,
+      parentNames: parentNames,
       siblings: siblings,
       address: address,
       phone: phone,
@@ -81,7 +81,7 @@ export default function TicketPage() {
     signposted,
     childName,
     childDOB,
-    parentName,
+    parentNames,
     siblings,
     address,
     phone,
@@ -155,7 +155,7 @@ export default function TicketPage() {
                 setSchoolYear={setSchoolYear}
               />
               <FamilyInfo
-                setParentName={setParentName}
+                setParentNames={setParentNames}
                 setSiblings={setSiblings}
               />
               <DiagnosisInfo

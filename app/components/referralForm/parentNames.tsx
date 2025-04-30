@@ -1,7 +1,9 @@
-import { useState, ChangeEvent } from "react";
-import AddDynamicInputFields from "../addInputFields";
+import { useState, ChangeEvent, Dispatch, SetStateAction } from "react";
+interface ParentsProps {
+  setParentNames: Dispatch<SetStateAction<string>>
+}
 
-const ParentNames = ({}) => {
+const ParentNames = ({setParentNames}: ParentsProps) => {
   const [inputs, setInputs] = useState([{ firstName: "", parent_email: "" }]);
 
   const handleAddInput = () => {
@@ -16,12 +18,14 @@ const ParentNames = ({}) => {
     let onChangeValue = [...inputs];
     onChangeValue[index][name as keyof (typeof inputs)[0]] = value;
     setInputs(onChangeValue);
+    setParentNames(JSON.stringify(onChangeValue));
   };
 
   const handleDeleteInput = (index: number) => {
     const newArray = [...inputs];
     newArray.splice(index, 1);
     setInputs(newArray);
+    setParentNames(JSON.stringify(newArray));
   };
 
   return (

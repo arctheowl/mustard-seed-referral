@@ -5,20 +5,18 @@ import { SiblingInfo } from "./Siblings";
 
 
 interface PersonalInfoProps {
-  setParentName: (name: string) => void;
+  setParentNames: Dispatch<SetStateAction<string>>
   setSiblings: Dispatch<SetStateAction<string>>
 }
 
-const siblings = [{ name: "Sibling 1", age: "Age" }];
-
 export const FamilyInfo = ({
-  setParentName,
+  setParentNames,
   setSiblings,
 }: PersonalInfoProps) => {
   return (
     <div className="">
       <Divider title={"Family Information"} />
-      <ParentNames />
+      <ParentNames setParentNames={setParentNames} />
       <SiblingInfo setSiblings={setSiblings} />
     </div>
   );

@@ -19,6 +19,7 @@ const DatePickerInput: React.FC<DatePickerProps> = ({
         }
       }}
       value={dateValue}
+      required
       format="dd/MM/yyyy"
       minDate={new Date("2015-08-31")}
       maxDate={new Date("2020-08-31")}
