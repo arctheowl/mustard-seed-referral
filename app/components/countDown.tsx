@@ -19,7 +19,10 @@ export default function CountDown({ children }: any) {
     <FlipClockCountdown
       to={data}
       className="text-black"
-      onComplete={() => router.push("/eligible")}
+      onComplete={() => {
+        localStorage.setItem("mustardCountDownComplete", "true");
+        router.push("/eligible");
+      }}
     >
       <div className="-mt-28">{children}</div>
     </FlipClockCountdown>

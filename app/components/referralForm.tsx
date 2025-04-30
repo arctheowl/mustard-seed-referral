@@ -10,6 +10,7 @@ import { FamilyInfo } from "./referralForm/FamilyInfo";
 import { DiagnosisInfo } from "./referralForm/Diagnosis";
 import { ChildsInterests } from "./referralForm/ChildsInterests";
 import { ConsentInfo } from "./referralForm/Consent";
+import FormCountDown from "./formCountdown";
 
 export default function TicketPage() {
   const [ticket, setTicket] = useState<string>("");
@@ -134,7 +135,11 @@ export default function TicketPage() {
           <div>
             <ProgressBar step={1} />
             <form className="mb-4 w-1/2 mx-auto">
-              <h1 className="text-6xl pt-10">Referral Form</h1>
+              <div className="flex flex-col items-center justify-center w-full h-full">
+                <h1 className="text-6xl pt-10">Referral Form</h1>
+                <FormCountDown />
+              </div>
+
               <PersonalInfo
                 setName={setName}
                 setEmail={setEmail}

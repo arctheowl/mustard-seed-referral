@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { format } from "date-fns";
 import {
   Dialog,
@@ -20,6 +20,7 @@ import {
 } from "../actions";
 import Image from "next/image";
 import Modal from "../components/modal";
+import { useRouter } from "next/navigation";
 
 const navigation = [
   { name: "Referrals", href: "#", icon: FolderIcon, current: false },
@@ -97,14 +98,6 @@ const downloadCSV = (data: any) => {
   link.click();
   document.body.removeChild(link);
 };
-// const fileData = JSON.stringify(userInfo);
-// const blob = new Blob([fileData], { type: "text/csv" });
-// const url = URL.createObjectURL(blob);
-// const link = document.createElement("a");
-// link.download = "referral_export.csv";
-// link.href = url;
-// link.click();
-// }
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -114,6 +107,20 @@ export default function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState<IUserData>();
   const currentTime = new Date().getTime();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (
+      !localStorage.getItem("mustardSeedAdmin") ||
+      localStorage.getItem("mustardSeedAdmin") === ""
+    ) {
+      console.log(
+        "You are not eligible to access this page. Please wait for the countdown to finish."
+      );
+      router.push("/");
+    }
+  }, []);
+
   useEffect(() => {
     let countDownTimer = "";
     let serverTickets = "";

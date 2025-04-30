@@ -3,10 +3,9 @@ import CountDown from "./countDown";
 
 interface BannerProps {
   message: string;
-  countdown: number;
 }
 
-const Banner: React.FC<BannerProps> = ({ message, countdown }) => {
+const Banner: React.FC<BannerProps> = ({ message }) => {
   return (
     <div className="flex-col flex rounded-sm text-center bg-green-700 text-white p-4 w-screen h-1/3 top-48">
       <div className="w-1/2 center mx-auto">
