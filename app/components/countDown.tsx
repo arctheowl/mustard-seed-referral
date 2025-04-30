@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function CountDown({ children }: any) {
   const router = useRouter();
-  const [data, setData] = useState<string>("2025-04-30 21:49:00");
+  const [data, setData] = useState<string>("2025-04-30 20:00:00");
   useEffect(() => {
     getCountDownTime().then((data: any) => {
       setData(data[0].time);

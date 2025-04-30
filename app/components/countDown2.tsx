@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getCountDownTime } from "../actions";
 
 export default function CountDown2({ children }: any) {
-  const [data, setData] = useState<string>("2025-04-30 21:49:00");
+  const [data, setData] = useState<string>("2025-04-30 20:00:00");
   useEffect(() => {
     getCountDownTime().then((data: any) => {
       setData(data[0].time);
